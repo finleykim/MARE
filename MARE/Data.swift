@@ -11,7 +11,7 @@ import UIKit
 struct Data{
     var uuidString: String
     var title: String
-    var mainImage: UIImage = UIImage()
+    var mainImage: UIImage
     var date: Date
     var cookingTime: String
     var ingredient: String

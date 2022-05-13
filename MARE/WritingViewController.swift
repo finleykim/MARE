@@ -43,13 +43,31 @@ class WritingViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextField()
-        placeHolder()
+        
+        setup()
         setupEditMode()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       self.view.endEditing(true)
+    }
+    
+    
+    
+    private func setup(){
+        self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+            [ingredientTextField,contentTextField,commentTextField].forEach{
+                $0?.layer.borderColor = UIColor.systemGray4.cgColor
+                $0?.textColor = .systemGray4
+                $0?.layer.cornerRadius = 8
+                $0?.font = .systemFont(ofSize: 15)
+                $0?.layer.borderWidth = 1
+                self.ingredientTextField.text = "재료를 입력해주세요"
+                self.contentTextField.text = "레시피를 입력해주세요"
+                self.commentTextField.text = "추가코멘트를 입력해주세요"
+                $0?.delegate = self
+        }
     }
     
     //EditMode
@@ -85,8 +103,8 @@ class WritingViewController: UIViewController{
         present(imagePickerController, animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        guard let image = self.mainImage.image ?? UIImage(named: "NilImage") else { return }
         guard let title = self.titleTextField.text else { return }
-        //guard let mainImage = self.mainImage.image else { return }
         guard let date = self.dataDate else { return }
         guard let cookingTime = self.cookingTimeTextField.text else { return }
         guard let ingredient = self.ingredientTextField.text else { return }
@@ -97,34 +115,23 @@ class WritingViewController: UIViewController{
         
         switch self.editMode{
         case .new:
-            let data = Data(uuidString: UUID().uuidString, title: title, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: false)
+            let data = Data(uuidString: UUID().uuidString, title: title, mainImage: image, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: false)
             NotificationCenter.default.post(
                 name: NSNotification.Name("newRecipe"), object: data, userInfo: nil
             )
         case let .edit(_, data):
-            let data = Data(uuidString: data.uuidString, title: title, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: data.bookmark)
+            let data = Data(uuidString: data.uuidString, title: title, mainImage: image, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: data.bookmark)
             NotificationCenter.default.post(
                 name: NSNotification.Name("editRecipe"), object: data, userInfo: nil
             )
+        
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
 
-extension WritingViewController{
-    func setupTextField(){
-        [ingredientTextField,contentTextField,commentTextField].forEach{
-            $0?.layer.borderColor = UIColor.secondaryLabel.cgColor
-            $0?.layer.borderWidth = 1
-        }
-    }
-    func placeHolder(){
-        self.ingredientTextField.text = "재료를 입력해주세요"
-        self.contentTextField.text = "레시피를 입력해주세요"
-        self.commentTextField.text = "추가코멘트를 입력해주세요"
-    }
-}
+
 
 
 extension WritingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -142,9 +149,9 @@ extension WritingViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension WritingViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
-        guard textView.textColor == .secondaryLabel else { return }
-        
+        guard textView.textColor == .systemGray4 else { return }
         textView.text = nil
         textView.textColor = .label
-    }
+        textView.font = .systemFont(ofSize: 17)
+  }
 }
