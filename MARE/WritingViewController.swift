@@ -16,9 +16,11 @@ enum EditMode{
 class WritingViewController: UIViewController{
 
     
+    @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var bookmarkButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var cookingTimeTextField: UITextField!
     @IBOutlet weak var ingredientTextField: UITextView!
@@ -40,20 +42,33 @@ class WritingViewController: UIViewController{
     var editMode: EditMode = .new
     var selectImage: UIImage?
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
         setupEditMode()
+        setupDataPicker()
+        touchesBegan()
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.view.endEditing(true)
+
+    
+    
+    
+    private func touchesBegan(){
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardIsHidden(sender:)))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        self.secondView.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
-    
+    @objc private func keyboardIsHidden(sender: UITapGestureRecognizer){
+        self.view.endEditing(true)
+    }
     
     private func setup(){
         self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
@@ -87,6 +102,33 @@ class WritingViewController: UIViewController{
         }
     }
     
+    
+    
+    
+    private func setupPickerView(){
+        
+    
+        self.folderTextField.inputView = self.folderPicker
+    }
+    
+    private func setupDataPicker(){
+        self.datePicker.datePickerMode = .date
+        self.datePicker.preferredDatePickerStyle = .wheels
+        self.datePicker.addTarget(self, action: #selector(datePickerValueDidChange(_:)), for: .valueChanged)
+        self.dateTextField.inputView = self.datePicker
+        self.datePicker.locale = Locale(identifier: "ko_KR")
+    }
+    
+    @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker){
+        let formmator = DateFormatter()
+        formmator.dateFormat = "yyyy-MM-dd(EEEE)"
+        formmator.locale = Locale(identifier: "ko_KR")
+        self.dataDate = datePicker.date
+        self.dateTextField.text = formmator.string(from: datePicker.date)
+        
+    }
+    
+
     //dateFormatter
     private func dateToString(date: Date) -> String {
         let formetter = DateFormatter()
@@ -99,7 +141,7 @@ class WritingViewController: UIViewController{
 
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
     }
-    @IBAction func imagePickButtonTapped(_ sender: UIButton) {
+    @IBAction func addImageButtonTapped(_ sender: UIButton) {
         present(imagePickerController, animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -115,16 +157,40 @@ class WritingViewController: UIViewController{
         
         switch self.editMode{
         case .new:
-            let data = Data(uuidString: UUID().uuidString, title: title, mainImage: image, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: false)
+            let data = Data(
+                uuidString: UUID().uuidString,
+                title: title,
+                mainImage: image,
+                date: date,
+                cookingTime: cookingTime,
+                ingredient: ingredient,
+                content: content,
+                comment: comment,
+                folder: folder,
+                bookmark: false)
             NotificationCenter.default.post(
-                name: NSNotification.Name("newRecipe"), object: data, userInfo: nil
+                name: NSNotification.Name("newRecipe"),
+                object: data,
+                userInfo: nil
             )
+            
         case let .edit(_, data):
-            let data = Data(uuidString: data.uuidString, title: title, mainImage: image, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: data.bookmark)
+            let data = Data(
+                uuidString: data.uuidString,
+                title: title,
+                mainImage: image,
+                date: date,
+                cookingTime: cookingTime,
+                ingredient: ingredient,
+                content: content,
+                comment: comment,
+                folder: folder,
+                bookmark: data.bookmark)
             NotificationCenter.default.post(
-                name: NSNotification.Name("editRecipe"), object: data, userInfo: nil
+                name: NSNotification.Name("editRecipe"),
+                object: data,
+                userInfo: nil
             )
-        
         }
         self.navigationController?.popViewController(animated: true)
     }
@@ -143,6 +209,8 @@ extension WritingViewController: UIImagePickerControllerDelegate, UINavigationCo
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectImage = originalImage
         }
+        self.mainImage.image = selectImage
+        self.addImageButton.alpha = 0
         picker.dismiss(animated: true)
     }
 }

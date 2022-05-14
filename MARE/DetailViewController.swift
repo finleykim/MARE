@@ -48,7 +48,7 @@ class DetailViewController: UIViewController{
     
     private func setUp(){
         guard let data = self.data else { return }
-        self.mainImage.image = data.mainImage
+        //self.mainImage.image = data.mainImage
         self.dateLabel.text = self.dateToString(date: data.date)
         self.temperatureLabel.text = data.cookingTime
         self.titleLabel.text = data.title
