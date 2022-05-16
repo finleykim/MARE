@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Data{
+struct Recipe{
     var uuidString: String
     var title: String
     var mainImage: UIImage
@@ -21,3 +21,5 @@ struct Data{
     var bookmark: Bool
 }
 
+
+    

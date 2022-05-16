@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController{
     
     var rightBarButtonItem = UINavigationItem()
-    var data : Data?
+    var recipe : Recipe?
     var indexPath: IndexPath?
     
     
@@ -37,9 +37,9 @@ class DetailViewController: UIViewController{
         guard let starDiary = notification.object as? [String: Any] else { return }
         guard let bookmark = starDiary["bookmark"] as? Bool else { return }
         guard let uuidString = starDiary["uuidString"] as? String else { return }
-        guard let data = self.data else { return }
-        if data.uuidString == uuidString {
-            self.data?.bookmark = bookmark
+        guard let recipe = self.recipe else { return }
+        if recipe.uuidString == uuidString {
+            self.recipe?.bookmark = bookmark
             self.setUp()
         }
     }
@@ -47,15 +47,15 @@ class DetailViewController: UIViewController{
     
     
     private func setUp(){
-        guard let data = self.data else { return }
+        guard let recipe = self.recipe else { return }
         //self.mainImage.image = data.mainImage
-        self.dateLabel.text = self.dateToString(date: data.date)
-        self.temperatureLabel.text = data.cookingTime
-        self.titleLabel.text = data.title
-        self.ingredientLabel.text = data.ingredient
-        self.contentLabel.text = data.content
-        self.commentLabel.text = data.comment
-        self.bookmarButton.setImage(data.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
+        self.dateLabel.text = self.dateToString(date: recipe.date)
+        self.temperatureLabel.text = recipe.cookingTime
+        self.titleLabel.text = recipe.title
+        self.ingredientLabel.text = recipe.ingredient
+        self.contentLabel.text = recipe.content
+        self.commentLabel.text = recipe.comment
+        self.bookmarButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
         self.bookmarButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
     }
     
@@ -91,7 +91,7 @@ extension DetailViewController{
     
     //Action
     @objc func rightBarButtonTapped(){
-        let activityItems: [Any] = [data?.title]
+        let activityItems: [Any] = [recipe?.title]
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         present(activityViewController, animated: true)
     }
@@ -117,14 +117,14 @@ extension DetailViewController{
     func editButtonTapped(_ action: UIAlertAction){
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "WritingViewController") as? WritingViewController else { return }
         guard let indexPath = self.indexPath else { return }
-        guard let data = self.data else { return }
-        viewController.editMode = .edit(indexPath,data)
+        guard let recipe = self.recipe else { return }
+        viewController.editMode = .edit(indexPath,recipe)
         NotificationCenter.default.addObserver(self, selector: #selector(editNotification(_:)), name: NSNotification.Name("editRecipe"), object: nil)
     }
     
     @objc func editNotification(_ notification: Notification){
-        guard let data = notification.object as? Data else { return }
-        self.data = data
+        guard let recipe = notification.object as? Recipe else { return }
+        self.recipe = recipe
         self.setUp()
     }
     
@@ -142,7 +142,7 @@ extension DetailViewController{
     }
     
     func secondDeleteButtonTapped(_ action: UIAlertAction){
-        guard let uuidString = self.data?.uuidString else { return }
+        guard let uuidString = self.recipe?.uuidString else { return }
         NotificationCenter.default.post(name: NSNotification.Name("deleteRecipe"), object: uuidString, userInfo: nil)
         self.navigationController?.popViewController(animated: true)
     }

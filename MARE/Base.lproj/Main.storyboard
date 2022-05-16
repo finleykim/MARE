@@ -165,19 +165,28 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-cP-ZTO">
                                                     <rect key="frame" x="30" y="19.5" width="353" height="59.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="폴더명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq7-Qa-JFJ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="폴더명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq7-Qa-JFJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="29"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13개의 레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35w-Zh-PQD">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="13개의 레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35w-Zh-PQD">
                                                             <rect key="frame" x="0.0" y="39" width="353" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Pq7-Qa-JFJ" firstAttribute="leading" secondItem="vHj-cP-ZTO" secondAttribute="leading" id="Drc-fG-QE5"/>
+                                                        <constraint firstItem="35w-Zh-PQD" firstAttribute="leading" secondItem="vHj-cP-ZTO" secondAttribute="leading" id="PRG-nl-KcF"/>
+                                                        <constraint firstItem="Pq7-Qa-JFJ" firstAttribute="top" secondItem="vHj-cP-ZTO" secondAttribute="top" id="Qbl-x1-HhH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Pq7-Qa-JFJ" secondAttribute="trailing" id="cvi-wJ-SL9"/>
+                                                        <constraint firstAttribute="bottom" secondItem="35w-Zh-PQD" secondAttribute="bottom" id="gP0-3y-SAw"/>
+                                                        <constraint firstAttribute="trailing" secondItem="35w-Zh-PQD" secondAttribute="trailing" id="kMz-92-Q4m"/>
+                                                        <constraint firstItem="35w-Zh-PQD" firstAttribute="top" secondItem="Pq7-Qa-JFJ" secondAttribute="bottom" constant="10" id="vsx-jf-Dmf"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

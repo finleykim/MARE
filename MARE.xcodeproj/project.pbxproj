@@ -16,7 +16,7 @@
 		C543F7DB282CEC3F00BC36A4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */; };
 		C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */; };
 		C543F7DF282CECB000BC36A4 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DE282CECB000BC36A4 /* FolderViewController.swift */; };
-		C543F7E1282CF26400BC36A4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Data.swift */; };
+		C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Recipe.swift */; };
 		C543F7E3282CF2A400BC36A4 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E2282CF2A400BC36A4 /* CollectionViewCell.swift */; };
 		C5AEF649282FB93100BB1EC5 /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */; };
 		C5AEF64B282FC77500BB1EC5 /* FolderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64A282FC77500BB1EC5 /* FolderData.swift */; };
@@ -35,7 +35,7 @@
 		C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		C543F7DE282CECB000BC36A4 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
-		C543F7E0282CF26400BC36A4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		C543F7E0282CF26400BC36A4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		C543F7E2282CF2A400BC36A4 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		C5AEF64A282FC77500BB1EC5 /* FolderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderData.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */,
 				C543F7DE282CECB000BC36A4 /* FolderViewController.swift */,
 				C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */,
-				C543F7E0282CF26400BC36A4 /* Data.swift */,
+				C543F7E0282CF26400BC36A4 /* Recipe.swift */,
 				C5AEF64A282FC77500BB1EC5 /* FolderData.swift */,
 				C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */,
 			);
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5AEF64D282FCF3300BB1EC5 /* FolderCollectionViewCell.swift in Sources */,
-				C543F7E1282CF26400BC36A4 /* Data.swift in Sources */,
+				C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */,
 				C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */,
 				C543F7E3282CF2A400BC36A4 /* CollectionViewCell.swift in Sources */,
 				C5AEF64B282FC77500BB1EC5 /* FolderData.swift in Sources */,

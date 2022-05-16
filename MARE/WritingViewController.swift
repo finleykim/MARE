@@ -10,7 +10,7 @@ import UIKit
 
 enum EditMode{
     case new
-    case edit(IndexPath, Data)
+    case edit(IndexPath, Recipe)
 }
 
 class WritingViewController: UIViewController{
@@ -88,15 +88,15 @@ class WritingViewController: UIViewController{
     //EditMode
     private func setupEditMode(){
         switch editMode{
-        case let .edit(_, data):
-            self.mainImage.image = data.mainImage
-            self.dataDate = data.date
-            self.cookingTimeTextField.text = data.cookingTime
-            self.titleTextField.text = data.title
-            self.ingredientTextField.text = data.ingredient
-            self.contentTextField.text = data.content
-            self.commentTextField.text = data.comment
-            self.folderTextField.text = data.folder
+        case let .edit(_, recipe):
+            self.mainImage.image = recipe.mainImage
+            self.dataDate = recipe.date
+            self.cookingTimeTextField.text = recipe.cookingTime
+            self.titleTextField.text = recipe.title
+            self.ingredientTextField.text = recipe.ingredient
+            self.contentTextField.text = recipe.content
+            self.commentTextField.text = recipe.comment
+            self.folderTextField.text = recipe.folder
             
         default: break
         }
@@ -157,7 +157,7 @@ class WritingViewController: UIViewController{
         
         switch self.editMode{
         case .new:
-            let data = Data(
+            let recipe = Recipe(
                 uuidString: UUID().uuidString,
                 title: title,
                 mainImage: image,
@@ -170,13 +170,13 @@ class WritingViewController: UIViewController{
                 bookmark: false)
             NotificationCenter.default.post(
                 name: NSNotification.Name("newRecipe"),
-                object: data,
+                object: recipe,
                 userInfo: nil
             )
             
-        case let .edit(_, data):
-            let data = Data(
-                uuidString: data.uuidString,
+        case let .edit(_, recipe):
+            let recipe = Recipe(
+                uuidString: recipe.uuidString,
                 title: title,
                 mainImage: image,
                 date: date,
@@ -185,10 +185,10 @@ class WritingViewController: UIViewController{
                 content: content,
                 comment: comment,
                 folder: folder,
-                bookmark: data.bookmark)
+                bookmark: recipe.bookmark)
             NotificationCenter.default.post(
                 name: NSNotification.Name("editRecipe"),
-                object: data,
+                object: recipe,
                 userInfo: nil
             )
         }
