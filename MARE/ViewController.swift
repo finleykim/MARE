@@ -22,9 +22,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadRecipeList()
         registerNib()
         setupCollectionView()
         notificationObserver()
+
     }
 
     private func registerNib(){
@@ -96,10 +98,33 @@ class ViewController: UIViewController {
 
     }
     
+    private func loadRecipeList(){
+        let userDefaults = UserDefaults.standard
+        guard let data = userDefaults.object(forKey: "recipeList") as? [[String : Any]] else { return }
+        self.recipeList = data.compactMap{
+            guard let uuidString = $0["uuidString"] as? String else { return nil }
+            guard let title = $0["title"] as? String else { return nil }
+            guard let date = $0["date"] as? Date else { return nil }
+            guard let cookingTime = $0["cookingTime"] as? String else { return nil }
+            guard let ingredient = $0["ingredient"] as? String else { return nil }
+            guard let content = $0["content"] as? String else { return nil }
+            guard let comment = $0["comment"] as? String else { return nil }
+            guard let folder = $0["folder"] as? String else { return nil }
+            guard let bookmark = $0["bookmark"] as? Bool else { return nil }
+            guard let mainImage = $0["mainImage"] as? String else { return nil }
+            
+            return Recipe(uuidString: uuidString, title: title, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: bookmark, mainImage: mainImage)
+        }
+        self.recipeList = self.recipeList.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+    }
+    
     
     private func setupCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
     }
     
 
@@ -147,7 +172,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width / 3), height: 180)
+        return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: (UIScreen.main.bounds.width / 2) - 20)
     }
 }
 
