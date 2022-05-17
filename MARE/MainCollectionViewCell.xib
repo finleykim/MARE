@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="de7-Il-PqZ">
-                        <rect key="frame" x="183" y="195" width="48" height="24"/>
+                        <rect key="frame" x="10" y="195" width="394" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -35,6 +35,8 @@
                 <constraint firstItem="rjh-B9-5KQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VXv-eg-iQ2"/>
                 <constraint firstAttribute="bottom" secondItem="rjh-B9-5KQ" secondAttribute="bottom" id="VpX-0F-A2c"/>
                 <constraint firstItem="rjh-B9-5KQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WlB-k3-t6b"/>
+                <constraint firstAttribute="trailing" secondItem="de7-Il-PqZ" secondAttribute="trailing" constant="10" id="YbI-30-n51"/>
+                <constraint firstItem="de7-Il-PqZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="su7-ho-Tdc"/>
             </constraints>
             <size key="customSize" width="140" height="180"/>
             <connections>

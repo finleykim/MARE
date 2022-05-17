@@ -15,6 +15,7 @@ final class AddFolderViewController: UIViewController{
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
+    var datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,8 @@ final class AddFolderViewController: UIViewController{
         guard let folderName = self.nameTextField.text else { return }
         
         let folder = Folder(uuidString: UUID().uuidString,
-                                    folderName: folderName)
+                                    folderName: folderName,
+                            date: datePicker.date)
         NotificationCenter.default.post(name: NSNotification.Name("newFolder"), object: folder, userInfo: nil)
         
         self.presentingViewController?.dismiss(animated: true, completion: nil)

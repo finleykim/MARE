@@ -47,7 +47,7 @@ class WritingViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
+
         setupEditMode()
         setupDataPicker()
         touchesBegan()
@@ -70,7 +70,19 @@ class WritingViewController: UIViewController{
         self.view.endEditing(true)
     }
     
-    private func setup(){
+    private func contentBasicSetup(){
+        self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+            [ingredientTextField,contentTextField,commentTextField].forEach{
+                $0?.layer.borderColor = UIColor.systemGray4.cgColor
+                $0?.textColor = .black
+                $0?.layer.cornerRadius = 8
+                $0?.font = .systemFont(ofSize: 17)
+                $0?.layer.borderWidth = 1
+
+            }
+    }
+    
+    private func newContentTextViewSetup(){
         self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
             [ingredientTextField,contentTextField,commentTextField].forEach{
                 $0?.layer.borderColor = UIColor.systemGray4.cgColor
@@ -82,15 +94,21 @@ class WritingViewController: UIViewController{
                 self.contentTextField.text = "레시피를 입력해주세요"
                 self.commentTextField.text = "추가코멘트를 입력해주세요"
                 $0?.delegate = self
+
         }
     }
     
     //EditMode
     private func setupEditMode(){
         switch editMode{
+        case .new:
+            newContentTextViewSetup()
+            
         case let .edit(_, recipe):
+            contentBasicSetup()
             self.mainImage.image = recipe.mainImage.toImage()
-            self.dataDate = recipe.date
+            //self.dataDate = recipe.date
+            self.dateTextField.text = dateToString(date: recipe.date)
             self.cookingTimeTextField.text = recipe.cookingTime
             self.titleTextField.text = recipe.title
             self.ingredientTextField.text = recipe.ingredient
@@ -98,8 +116,7 @@ class WritingViewController: UIViewController{
             self.commentTextField.text = recipe.comment
             self.folderTextField.text = recipe.folder
             self.addImageButton.alpha = 0
-            
-        default: break
+
         }
     }
     
@@ -188,6 +205,7 @@ class WritingViewController: UIViewController{
             )
             
         case let .edit(_, recipe):
+
             let recipe = Recipe(
                 uuidString: recipe.uuidString,
                 title: title,

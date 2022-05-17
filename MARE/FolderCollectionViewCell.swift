@@ -7,9 +7,12 @@
 
 import UIKit
 
-final class FolderCollectionViewCell: UICollectionViewCell{
+class FolderCollectionViewCell: UICollectionViewCell{
     
-    @IBOutlet weak var folderName: UILabel!
+    
+    
+    @IBOutlet weak var folderNameLabel: UILabel!
+    
     @IBOutlet weak var recipeCount: UILabel!
     
     required init?(coder: NSCoder){

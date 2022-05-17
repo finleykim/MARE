@@ -155,7 +155,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="aJj-2y-Ket" customClass="FolderCollectionViewCell" customModule="MARE" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FolderCollectionViewCell" id="aJj-2y-Ket" customClass="FolderCollectionViewCell" customModule="MARE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="413" height="98"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="y7o-JH-a29">
@@ -167,12 +167,18 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="폴더명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq7-Qa-JFJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="29"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="29" id="FGo-Xs-CYa"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13개의 레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35w-Zh-PQD">
                                                             <rect key="frame" x="0.0" y="39" width="353" height="20.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20.5" id="a3u-hH-8w7"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -188,7 +194,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="413" height="98"/>
                                         <connections>
-                                            <outlet property="folderName" destination="Pq7-Qa-JFJ" id="wEf-F3-CA9"/>
+                                            <outlet property="folderNameLabel" destination="Pq7-Qa-JFJ" id="iar-x1-Z8F"/>
                                             <outlet property="recipeCount" destination="35w-Zh-PQD" id="YXZ-6D-ogp"/>
                                         </connections>
                                     </collectionViewCell>

@@ -10,4 +10,5 @@ import Foundation
 struct Folder{
     var uuidString: String
     var folderName: String
+    var date: Date
 }
