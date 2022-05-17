@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 
-class FolderViewController: UIViewController{
+class FolderViewController: UIViewController, UITableViewDelegate{
     
 
-    @IBOutlet weak var folderCollectionView: UICollectionView!
+    @IBOutlet weak var folderTableView: UITableView!
+    
     
     private var folderList = [Folder](){
         didSet{
@@ -24,7 +25,7 @@ class FolderViewController: UIViewController{
         super.viewDidLoad()
         setupNavigationBar()
         loadFolderList()
-        setupCollectionView()
+        setupTableView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
     }
@@ -35,18 +36,16 @@ class FolderViewController: UIViewController{
         self.folderList = self.folderList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
-        self.folderCollectionView.reloadData()
+        self.folderTableView.reloadData()
         
     }
     
     
     
     
-    private func setupCollectionView(){
-        self.folderCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.folderCollectionView.contentInset = UIEdgeInsets(top: 0, left:0, bottom: 0, right: 0)
-        self.folderCollectionView.delegate = self
-        self.folderCollectionView.dataSource = self
+    private func setupTableView(){
+        self.folderTableView.delegate = self
+        self.folderTableView.dataSource = self
     }
     
     private func saveFolderList(){
@@ -79,38 +78,51 @@ class FolderViewController: UIViewController{
 }
 
 
-extension FolderViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.folderList.count
-        
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FolderCollectionViewCell", for: indexPath) as? FolderCollectionViewCell else { return UICollectionViewCell() }
-        
-        let folder = self.folderList[indexPath.row]
-        cell.folderNameLabel.text = folder.folderName
-        // cell.recipeCount.text = "\(self.recipeList.count)개의 레시피"
-    
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width - 20, height: 80)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController else { return }
-        //폴더에 포함된 레시피 표시코드
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            self.folderList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
+
+
+
+extension FolderViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.folderList.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "FolderTableViewCell", for: indexPath) as? FolderTableViewCell else { return UITableViewCell() }
+    let folder = self.folderList[indexPath.row]
+      cell.folderNameLabel.text = folder.folderName
+    return cell
+  }
+
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    var folderList = self.folderList
+    let task = folderList[sourceIndexPath.row]
+    folderList.remove(at: sourceIndexPath.row)
+    folderList.insert(task, at: destinationIndexPath.row)
+    self.folderList = folderList
+  }
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    self.folderList.remove(at: indexPath.row)
+    tableView.deleteRows(at: [indexPath], with: .automatic)
+
+//    if self.folderList.isEmpty {
+//      self.doneButtonTap()
+//    }
+  }
 }
+
+//extension FolderViewController: UITableViewDelegate {
+//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    var folder = self.folderList[indexPath.row]
+//    folder.done = !folderList.done
+////    self.folderList[indexPath.row] = folderList
+////    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+//  }
+//}
 
 
 extension FolderViewController{

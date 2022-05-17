@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FolderCollectionViewCell: UICollectionViewCell{
+class FolderTableViewCell: UITableViewCell{
     
     
     

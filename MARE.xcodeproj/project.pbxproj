@@ -21,7 +21,7 @@
 		C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Recipe.swift */; };
 		C5AEF649282FB93100BB1EC5 /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */; };
 		C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64A282FC77500BB1EC5 /* Folder.swift */; };
-		C5AEF64D282FCF3300BB1EC5 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */; };
+		C5AEF64D282FCF3300BB1EC5 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		C543F7E0282CF26400BC36A4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		C5AEF64A282FC77500BB1EC5 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
-		C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
+		C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 				C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */,
 				C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */,
 				C543F7DE282CECB000BC36A4 /* FolderViewController.swift */,
-				C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */,
+				C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */,
 				C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */,
 				C50A9F74283337EC00DA476C /* Entity */,
 				C50A9F7528333B8400DA476C /* MainCollectionViewCell.swift */,
@@ -174,7 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5AEF64D282FCF3300BB1EC5 /* FolderCollectionViewCell.swift in Sources */,
+				C5AEF64D282FCF3300BB1EC5 /* FolderTableViewCell.swift in Sources */,
 				C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */,
 				C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */,
 				C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */,
