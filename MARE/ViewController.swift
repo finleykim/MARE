@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
+    var maincollectionViewCell : MainCollectionViewCell?
     var recipeList = [Recipe](){
         didSet{
             self.saveRecipeList()
@@ -60,6 +60,7 @@ class ViewController: UIViewController {
         self.recipeList = self.recipeList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
+        self.collectionView.reloadData()
     }
     
     @objc func deleteRecipeNotification(_ notification: Notification){
@@ -128,7 +129,13 @@ class ViewController: UIViewController {
     }
     
 
-    
+    private func setupCellLabel(){
+        if maincollectionViewCell?.cellImageView.image == UIImage(named: "NilImage"){
+            maincollectionViewCell?.cellLabel.alpha = 1
+        }else {
+            maincollectionViewCell?.cellLabel.alpha = 0
+        }
+    }
     
     
     
@@ -157,6 +164,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
         let recipe = self.recipeList[indexPath.row]
         cell.cellImageView.image = recipe.mainImage.toImage()
+        cell.cellLabel.text = recipe.title
+        setupCellLabel()
         
         return cell
     }

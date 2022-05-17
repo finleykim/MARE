@@ -10,6 +10,7 @@ import UIKit
 class MainCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var cellLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 3.0

@@ -89,7 +89,7 @@ class WritingViewController: UIViewController{
     private func setupEditMode(){
         switch editMode{
         case let .edit(_, recipe):
-            //self.mainImage.image = recipe.mainImage
+            self.mainImage.image = recipe.mainImage.toImage()
             self.dataDate = recipe.date
             self.cookingTimeTextField.text = recipe.cookingTime
             self.titleTextField.text = recipe.title
@@ -97,6 +97,7 @@ class WritingViewController: UIViewController{
             self.contentTextField.text = recipe.content
             self.commentTextField.text = recipe.comment
             self.folderTextField.text = recipe.folder
+            self.addImageButton.alpha = 0
             
         default: break
         }
@@ -138,6 +139,19 @@ class WritingViewController: UIViewController{
         return formetter.string(from: date)
     }
     
+    
+    private func image() -> String {
+        if self.mainImage.image == selectImage{
+            return self.mainImage.image?.toString() ?? ""
+        } else{
+            if self.mainImage.image == UIImage(named: "AddImage"){
+                return UIImage(named: "NilImage")?.toString() ?? ""
+            } else {
+                return self.mainImage.image?.toString() ?? ""
+                
+            }
+        }
+    }
 
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
     }
@@ -152,7 +166,7 @@ class WritingViewController: UIViewController{
         guard let content = self.contentTextField.text else { return }
         guard let comment = self.commentTextField.text else { return }
         guard let folder = self.folderTextField.text else { return }
-        guard let mainImage = self.mainImage.image?.toString() else { return }
+        let mainImage = image()
         
         switch self.editMode{
         case .new:

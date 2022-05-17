@@ -48,7 +48,7 @@ class DetailViewController: UIViewController{
     
     private func setUp(){
         guard let recipe = self.recipe else { return }
-        //self.mainImage.image = data.mainImage
+        self.mainImage.image = recipe.mainImage.toImage()
         self.dateLabel.text = self.dateToString(date: recipe.date)
         self.temperatureLabel.text = recipe.cookingTime
         self.titleLabel.text = recipe.title
@@ -57,6 +57,7 @@ class DetailViewController: UIViewController{
         self.commentLabel.text = recipe.comment
         self.bookmarButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
         self.bookmarButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func dateToString(date: Date) -> String {
@@ -81,11 +82,13 @@ class DetailViewController: UIViewController{
 extension DetailViewController{
     func setupNavigationBar(){
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        navigationController?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        rightBarButtonItem.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+       navigationItem.rightBarButtonItem = rightBarButtonItem
         
         let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        navigationController?.navigationItem.leftBarButtonItem = leftBarButtonItem
-        
+        leftBarButtonItem.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+       navigationItem.leftBarButtonItem = leftBarButtonItem
+
     }
     
     
@@ -117,9 +120,14 @@ extension DetailViewController{
     func editButtonTapped(_ action: UIAlertAction){
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "WritingViewController") as? WritingViewController else { return }
         guard let indexPath = self.indexPath else { return }
-        guard let data = self.recipe else { return }
-        viewController.editMode = .edit(indexPath,data)
-        NotificationCenter.default.addObserver(self, selector: #selector(editNotification(_:)), name: NSNotification.Name("editRecipe"), object: nil)
+        guard let recipe = self.recipe else { return }
+        viewController.editMode = .edit(indexPath,recipe)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(editNotification(_:)),
+            name: NSNotification.Name("editRecipe"),
+            object: nil)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc func editNotification(_ notification: Notification){
@@ -135,6 +143,11 @@ extension DetailViewController{
         
         alert.addAction(cancelButton)
         alert.addAction(secondDeleteButton)
+        
+        self.present(alert, animated: true){
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            alert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
     }
     
     func cancelButtonTapped(_ action: UIAlertAction){
@@ -150,3 +163,4 @@ extension DetailViewController{
 
     
 }
+
