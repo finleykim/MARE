@@ -8,10 +8,9 @@
 import Foundation
 import UIKit
 
-struct Data{
+struct Recipe{
     var uuidString: String
     var title: String
-    var mainImage: UIImage
     var date: Date
     var cookingTime: String
     var ingredient: String
@@ -19,5 +18,9 @@ struct Data{
     var comment: String
     var folder: String
     var bookmark: Bool
+    var mainImage: String
 }
 
+//struct MainImage{
+//    var mainImage: [String: UIImage]
+//}

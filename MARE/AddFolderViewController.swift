@@ -52,9 +52,9 @@ final class AddFolderViewController: UIViewController{
         
         guard let folderName = self.nameTextField.text else { return }
         
-        let folderData = FolderData(uuidString: UUID().uuidString,
+        let folder = Folder(uuidString: UUID().uuidString,
                                     folderName: folderName)
-        NotificationCenter.default.post(name: NSNotification.Name("newFolder"), object: folderData, userInfo: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("newFolder"), object: folder, userInfo: nil)
         
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }

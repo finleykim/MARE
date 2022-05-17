@@ -10,7 +10,7 @@ import UIKit
 
 enum EditMode{
     case new
-    case edit(IndexPath, Data)
+    case edit(IndexPath, Recipe)
 }
 
 class WritingViewController: UIViewController{
@@ -88,15 +88,15 @@ class WritingViewController: UIViewController{
     //EditMode
     private func setupEditMode(){
         switch editMode{
-        case let .edit(_, data):
-            self.mainImage.image = data.mainImage
-            self.dataDate = data.date
-            self.cookingTimeTextField.text = data.cookingTime
-            self.titleTextField.text = data.title
-            self.ingredientTextField.text = data.ingredient
-            self.contentTextField.text = data.content
-            self.commentTextField.text = data.comment
-            self.folderTextField.text = data.folder
+        case let .edit(_, recipe):
+            //self.mainImage.image = recipe.mainImage
+            self.dataDate = recipe.date
+            self.cookingTimeTextField.text = recipe.cookingTime
+            self.titleTextField.text = recipe.title
+            self.ingredientTextField.text = recipe.ingredient
+            self.contentTextField.text = recipe.content
+            self.commentTextField.text = recipe.comment
+            self.folderTextField.text = recipe.folder
             
         default: break
         }
@@ -145,7 +145,6 @@ class WritingViewController: UIViewController{
         present(imagePickerController, animated: true)
     }
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        guard let image = self.mainImage.image ?? UIImage(named: "NilImage") else { return }
         guard let title = self.titleTextField.text else { return }
         guard let date = self.dataDate else { return }
         guard let cookingTime = self.cookingTimeTextField.text else { return }
@@ -153,42 +152,42 @@ class WritingViewController: UIViewController{
         guard let content = self.contentTextField.text else { return }
         guard let comment = self.commentTextField.text else { return }
         guard let folder = self.folderTextField.text else { return }
-        
+        guard let mainImage = self.mainImage.image?.toString() else { return }
         
         switch self.editMode{
         case .new:
-            let data = Data(
+            let recipe = Recipe(
                 uuidString: UUID().uuidString,
                 title: title,
-                mainImage: image,
                 date: date,
                 cookingTime: cookingTime,
                 ingredient: ingredient,
                 content: content,
                 comment: comment,
                 folder: folder,
-                bookmark: false)
+                bookmark: false,
+                mainImage: mainImage)
             NotificationCenter.default.post(
                 name: NSNotification.Name("newRecipe"),
-                object: data,
+                object: recipe,
                 userInfo: nil
             )
             
-        case let .edit(_, data):
-            let data = Data(
-                uuidString: data.uuidString,
+        case let .edit(_, recipe):
+            let recipe = Recipe(
+                uuidString: recipe.uuidString,
                 title: title,
-                mainImage: image,
                 date: date,
                 cookingTime: cookingTime,
                 ingredient: ingredient,
                 content: content,
                 comment: comment,
                 folder: folder,
-                bookmark: data.bookmark)
+                bookmark: recipe.bookmark,
+                mainImage: mainImage)
             NotificationCenter.default.post(
                 name: NSNotification.Name("editRecipe"),
-                object: data,
+                object: recipe,
                 userInfo: nil
             )
         }
@@ -222,4 +221,12 @@ extension WritingViewController: UITextViewDelegate{
         textView.textColor = .label
         textView.font = .systemFont(ofSize: 17)
   }
+}
+
+
+extension UIImage{
+    func toString() -> String?{
+        let pngData = self.pngData()
+        return pngData?.base64EncodedString(options: .lineLength64Characters)
+    }
 }

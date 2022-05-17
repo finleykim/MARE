@@ -13,7 +13,7 @@ class FolderViewController: UIViewController{
 
     @IBOutlet weak var folderCollectionView: UICollectionView!
     
-    private var folderList = [FolderData](){
+    private var folderList = [Folder](){
         didSet{
             self.saveFolderList()
         }
@@ -28,7 +28,7 @@ class FolderViewController: UIViewController{
     }
     
     @objc private func newFolder(_ notification: Notification){
-        guard let folder = notification.object as? FolderData else { return }
+        guard let folder = notification.object as? Folder else { return }
         self.folderList.append(folder)
         self.folderCollectionView.reloadData()
         

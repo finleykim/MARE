@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C50A9F7728333B8400DA476C /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A9F7528333B8400DA476C /* MainCollectionViewCell.swift */; };
+		C50A9F7828333B8400DA476C /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50A9F7628333B8400DA476C /* MainCollectionViewCell.xib */; };
 		C543F7C7282CB1ED00BC36A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7C6282CB1ED00BC36A4 /* AppDelegate.swift */; };
 		C543F7C9282CB1ED00BC36A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7C8282CB1ED00BC36A4 /* SceneDelegate.swift */; };
 		C543F7CB282CB1ED00BC36A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7CA282CB1ED00BC36A4 /* ViewController.swift */; };
@@ -16,14 +18,16 @@
 		C543F7DB282CEC3F00BC36A4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */; };
 		C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */; };
 		C543F7DF282CECB000BC36A4 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DE282CECB000BC36A4 /* FolderViewController.swift */; };
-		C543F7E1282CF26400BC36A4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Data.swift */; };
+		C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Recipe.swift */; };
 		C543F7E3282CF2A400BC36A4 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E2282CF2A400BC36A4 /* CollectionViewCell.swift */; };
 		C5AEF649282FB93100BB1EC5 /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */; };
-		C5AEF64B282FC77500BB1EC5 /* FolderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64A282FC77500BB1EC5 /* FolderData.swift */; };
+		C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64A282FC77500BB1EC5 /* Folder.swift */; };
 		C5AEF64D282FCF3300BB1EC5 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C50A9F7528333B8400DA476C /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		C50A9F7628333B8400DA476C /* MainCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCollectionViewCell.xib; sourceTree = "<group>"; };
 		C543F7C3282CB1ED00BC36A4 /* MARE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MARE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C543F7C6282CB1ED00BC36A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C543F7C8282CB1ED00BC36A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,10 +39,10 @@
 		C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		C543F7DE282CECB000BC36A4 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
-		C543F7E0282CF26400BC36A4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		C543F7E0282CF26400BC36A4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		C543F7E2282CF2A400BC36A4 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
-		C5AEF64A282FC77500BB1EC5 /* FolderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderData.swift; sourceTree = "<group>"; };
+		C5AEF64A282FC77500BB1EC5 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C50A9F74283337EC00DA476C /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C543F7E0282CF26400BC36A4 /* Recipe.swift */,
+				C5AEF64A282FC77500BB1EC5 /* Folder.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		C543F7BA282CB1EC00BC36A4 = {
 			isa = PBXGroup;
 			children = (
@@ -84,9 +97,10 @@
 				C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */,
 				C543F7DE282CECB000BC36A4 /* FolderViewController.swift */,
 				C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */,
-				C543F7E0282CF26400BC36A4 /* Data.swift */,
-				C5AEF64A282FC77500BB1EC5 /* FolderData.swift */,
 				C5AEF64C282FCF3300BB1EC5 /* FolderCollectionViewCell.swift */,
+				C50A9F74283337EC00DA476C /* Entity */,
+				C50A9F7528333B8400DA476C /* MainCollectionViewCell.swift */,
+				C50A9F7628333B8400DA476C /* MainCollectionViewCell.xib */,
 			);
 			path = MARE;
 			sourceTree = "<group>";
@@ -152,6 +166,7 @@
 				C543F7D3282CB1F100BC36A4 /* LaunchScreen.storyboard in Resources */,
 				C543F7D0282CB1F100BC36A4 /* Assets.xcassets in Resources */,
 				C543F7CE282CB1ED00BC36A4 /* Main.storyboard in Resources */,
+				C50A9F7828333B8400DA476C /* MainCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,12 +178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5AEF64D282FCF3300BB1EC5 /* FolderCollectionViewCell.swift in Sources */,
-				C543F7E1282CF26400BC36A4 /* Data.swift in Sources */,
+				C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */,
 				C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */,
 				C543F7E3282CF2A400BC36A4 /* CollectionViewCell.swift in Sources */,
-				C5AEF64B282FC77500BB1EC5 /* FolderData.swift in Sources */,
+				C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */,
 				C543F7CB282CB1ED00BC36A4 /* ViewController.swift in Sources */,
 				C543F7DF282CECB000BC36A4 /* FolderViewController.swift in Sources */,
+				C50A9F7728333B8400DA476C /* MainCollectionViewCell.swift in Sources */,
 				C543F7C7282CB1ED00BC36A4 /* AppDelegate.swift in Sources */,
 				C5AEF649282FB93100BB1EC5 /* AddFolderViewController.swift in Sources */,
 				C543F7C9282CB1ED00BC36A4 /* SceneDelegate.swift in Sources */,

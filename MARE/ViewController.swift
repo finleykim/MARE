@@ -13,19 +13,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    var dataList = [Data](){
+    var recipeList = [Recipe](){
         didSet{
-            self.saveDataList()
+            self.saveRecipeList()
         }
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerNib()
         setupCollectionView()
         notificationObserver()
     }
 
+    private func registerNib(){
+        let nibName = UINib(nibName: "MainCollectionViewCell", bundle: nil)
+        self.collectionView.register(nibName, forCellWithReuseIdentifier: "MainCollectionViewCell")
+    }
+    
     
     func notificationObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(newRecipeNotification(_:)), name: NSNotification.Name("newRecipe"), object: nil)
@@ -35,27 +41,29 @@ class ViewController: UIViewController {
     }
     
     @objc func newRecipeNotification(_ notification: Notification){
-        guard let data = notification.object as? Data else { return }
-        self.dataList.append(data)
-        self.dataList = self.dataList.sorted(by: {
+        guard let recipe = notification.object as? Recipe else { return }
+        self.recipeList.append(recipe)
+        self.recipeList = self.recipeList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
+
         self.collectionView.reloadData()
     }
     
     @objc func editRecipeNotification(_ notification: Notification){
-        guard let data = notification.object as? Data else { return }
-        guard let index = self.dataList.firstIndex(where: {$0.uuidString == data.uuidString}) else { return }
-        self.dataList[index] = data
-        self.dataList = self.dataList.sorted(by: {
+        guard let recipe = notification.object as? Recipe else { return }
+        guard let index = self.recipeList.firstIndex(where: {$0.uuidString == recipe.uuidString}) else { return }
+        self.recipeList[index] = recipe
+        
+        self.recipeList = self.recipeList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
     }
     
     @objc func deleteRecipeNotification(_ notification: Notification){
         guard let uuidString = notification.object as? String else { return }
-        guard let index = self.dataList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
-        self.dataList.remove(at: index)
+        guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+        self.recipeList.remove(at: index)
         self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
     }
     
@@ -63,28 +71,29 @@ class ViewController: UIViewController {
       guard let starDiary = notification.object as? [String: Any] else { return }
       guard let bookmark = starDiary["bookmark"] as? Bool else { return }
       guard let uuidString = starDiary["uuidString"] as? String else { return }
-      guard let index = self.dataList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
-      self.dataList[index].bookmark = bookmark
+      guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
+      self.recipeList[index].bookmark = bookmark
     }
     
     
-    private func saveDataList(){
-        let date = self.dataList.map{
+    private func saveRecipeList(){
+        let date = self.recipeList.map{
             [
                 "uuidString": $0.uuidString,
                 "title": $0.title,
-                "mainImage": $0.mainImage,
                 "date": $0.date,
                 "cookingTime": $0.cookingTime,
                 "ingredient": $0.ingredient,
                 "content": $0.content,
                 "comment": $0.comment,
                 "folder": $0.folder,
-                "bookmark": $0.bookmark
+                "bookmark": $0.bookmark,
+                "mainImage" : $0.mainImage
             ]
         }
         let userDefaults = UserDefaults.standard
-        userDefaults.set(date, forKey: "dataList")
+        userDefaults.set(date, forKey: "recipeList")
+
     }
     
     
@@ -115,22 +124,22 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        let data = self.dataList[indexPath.row]
-        cell.imageViewCell.image = data.mainImage
-        
-        return cell
+        return self.recipeList.count
     }
     
 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
+        let recipe = self.recipeList[indexPath.row]
+        cell.cellImageView.image = recipe.mainImage.toImage()
+        
+        return cell
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        let data = self.dataList[indexPath.row]
-        viewController.data = data
+        let recipe = self.recipeList[indexPath.row]
+        viewController.recipe = recipe
         viewController.indexPath = indexPath
         
         navigationController?.pushViewController(viewController, animated: true)
@@ -139,5 +148,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (UIScreen.main.bounds.width / 3), height: 180)
+    }
+}
+
+extension String{
+    func toImage() -> UIImage?{
+        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters){
+            return UIImage(data: data)
+        }
+        return nil
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FolderData{
+struct Folder{
     var uuidString: String
     var folderName: String
 }
