@@ -41,6 +41,7 @@ class WritingViewController: UIViewController{
     private var dataDate: Date?
     var editMode: EditMode = .new
     var selectImage: UIImage?
+    var recipe: Recipe?
     
 
     
@@ -171,6 +172,7 @@ class WritingViewController: UIViewController{
     }
 
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
+
     }
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
         present(imagePickerController, animated: true)

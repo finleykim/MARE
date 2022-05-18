@@ -22,7 +22,7 @@ class DetailViewController: UIViewController{
     @IBOutlet weak var ingredientLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var bookmarButton: UIButton!
+    @IBOutlet weak var bookmarkButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -55,8 +55,8 @@ class DetailViewController: UIViewController{
         self.ingredientLabel.text = recipe.ingredient
         self.contentLabel.text = recipe.content
         self.commentLabel.text = recipe.comment
-        self.bookmarButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
-        self.bookmarButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
+        self.bookmarkButton?.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -75,8 +75,26 @@ class DetailViewController: UIViewController{
     }
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
+        guard let bookmark = self.recipe?.bookmark else { return }
+        if bookmark{
+            self.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        } else{
+            self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        }
+        self.recipe?.bookmark = !bookmark
+        NotificationCenter.default.post(
+        name: NSNotification.Name("bookmark"),
+        object: [
+            "recipe" : self.recipe,
+            "bookmark" : self.recipe?.bookmark ?? false,
+            "uuidString" : recipe?.uuidString
+        ],
+        userInfo: nil
+        )
     }
-    
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension DetailViewController{

@@ -58,8 +58,56 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9v0-3a-ORc">
                                 <rect key="frame" x="100" y="60" width="214" height="17"/>
                             </imageView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-E7-Pls">
+                                <rect key="frame" x="0.0" y="97" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="Zb9-8Y-Jav">
+                                <rect key="frame" x="20" y="168" width="374" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="최근 북마크한 레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foa-YK-RcE">
+                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZ0-Aq-T7z">
+                                        <rect key="frame" x="301.5" y="0.0" width="72.5" height="31"/>
+                                        <color key="tintColor" red="0.90980392160000001" green="0.72156862749999995" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="모두보기"/>
+                                        <connections>
+                                            <action selector="seeAllBookmarkButtonTapped:" destination="dtf-48-yOP" eventType="touchUpInside" id="p7k-gQ-TY3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ne2-cz-Ifl">
+                                <rect key="frame" x="0.0" y="219" width="414" height="240"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="CQm-Vm-dq7"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jLw-Yc-owN">
+                                    <size key="itemSize" width="226" height="242"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bookmarkCollectionViewCell" id="vlC-Pd-cMM" customClass="bookmarkCollectionViewCell">
+                                        <rect key="frame" x="94" y="0.0" width="226" height="242"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uKh-vb-K0V">
+                                            <rect key="frame" x="0.0" y="0.0" width="226" height="242"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="226" height="242"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7LZ-ag-9p3">
-                                <rect key="frame" x="10" y="177" width="394" height="636"/>
+                                <rect key="frame" x="10" y="539" width="394" height="357"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="loj-KI-iFH">
                                     <size key="itemSize" width="128" height="128"/>
@@ -92,24 +140,40 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-E7-Pls">
-                                <rect key="frame" x="0.0" y="97" width="414" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="Hi2-cF-Yog">
+                                <rect key="frame" x="20" y="500" width="374" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="최근 업데이트한 레시피" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQr-ZY-2FG">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sfs-pY-zq6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ne2-cz-Ifl" firstAttribute="top" secondItem="Zb9-8Y-Jav" secondAttribute="bottom" constant="20" id="0Tz-wi-12m"/>
+                            <constraint firstItem="Zb9-8Y-Jav" firstAttribute="top" secondItem="fj0-E7-Pls" secondAttribute="bottom" constant="20" id="8F9-6A-z4i"/>
+                            <constraint firstItem="Hi2-cF-Yog" firstAttribute="firstBaseline" secondItem="ne2-cz-Ifl" secondAttribute="baseline" constant="60" id="92y-si-qj9"/>
                             <constraint firstItem="fj0-E7-Pls" firstAttribute="trailing" secondItem="sfs-pY-zq6" secondAttribute="trailing" id="FIg-9c-rKG"/>
                             <constraint firstItem="9v0-3a-ORc" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" constant="100" id="IC8-21-hvo"/>
-                            <constraint firstItem="sfs-pY-zq6" firstAttribute="bottom" secondItem="7LZ-ag-9p3" secondAttribute="bottom" id="TZ1-7h-pow"/>
+                            <constraint firstItem="sfs-pY-zq6" firstAttribute="trailing" secondItem="Hi2-cF-Yog" secondAttribute="trailing" constant="20" id="Iyl-GX-quA"/>
+                            <constraint firstItem="ne2-cz-Ifl" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" id="Q5M-LY-fPA"/>
+                            <constraint firstAttribute="bottom" secondItem="7LZ-ag-9p3" secondAttribute="bottom" id="TZ1-7h-pow"/>
+                            <constraint firstItem="Hi2-cF-Yog" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" constant="20" id="X3z-p2-Zf4"/>
                             <constraint firstItem="sfs-pY-zq6" firstAttribute="trailing" secondItem="7LZ-ag-9p3" secondAttribute="trailing" constant="10" id="Yew-fW-wS2"/>
+                            <constraint firstItem="sfs-pY-zq6" firstAttribute="trailing" secondItem="ne2-cz-Ifl" secondAttribute="trailing" id="fAQ-8p-YkP"/>
+                            <constraint firstItem="sfs-pY-zq6" firstAttribute="trailing" secondItem="Zb9-8Y-Jav" secondAttribute="trailing" constant="20" id="g3J-Ix-h4N"/>
                             <constraint firstItem="fj0-E7-Pls" firstAttribute="top" secondItem="9v0-3a-ORc" secondAttribute="bottom" constant="20" id="gsf-bZ-60n"/>
                             <constraint firstItem="fj0-E7-Pls" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" id="iE3-IF-Mhx"/>
                             <constraint firstItem="sfs-pY-zq6" firstAttribute="trailing" secondItem="9v0-3a-ORc" secondAttribute="trailing" constant="100" id="l5J-8T-uCu"/>
                             <constraint firstItem="7LZ-ag-9p3" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" constant="10" id="oYh-RD-EM2"/>
-                            <constraint firstItem="7LZ-ag-9p3" firstAttribute="top" secondItem="9v0-3a-ORc" secondAttribute="bottom" constant="100" id="qR1-h4-70q"/>
+                            <constraint firstItem="7LZ-ag-9p3" firstAttribute="firstBaseline" secondItem="Hi2-cF-Yog" secondAttribute="baseline" constant="20" id="qQR-5N-ORZ"/>
                             <constraint firstItem="9v0-3a-ORc" firstAttribute="top" secondItem="KbQ-Kn-LI3" secondAttribute="top" constant="60" id="xQm-w4-fiq"/>
+                            <constraint firstItem="Zb9-8Y-Jav" firstAttribute="leading" secondItem="sfs-pY-zq6" secondAttribute="leading" constant="20" id="z9X-x6-X0b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zSR-s4-tZc">
@@ -127,12 +191,93 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bookmarkCollectionView" destination="ne2-cz-Ifl" id="BLj-jn-K6W"/>
                         <outlet property="collectionView" destination="7LZ-ag-9p3" id="aSF-DT-OwH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mss-ES-s8I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-761" y="-830"/>
+            <point key="canvasLocation" x="-762.31884057971024" y="-830.35714285714278"/>
+        </scene>
+        <!--Bookmark View Controller-->
+        <scene sceneID="fjD-ja-Yfy">
+            <objects>
+                <viewController storyboardIdentifier="BookmarkViewController" id="JHQ-v3-idE" customClass="BookmarkViewController" customModule="MARE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P9T-9A-2fZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Ssn-Ie-zFg">
+                                <rect key="frame" x="100" y="60" width="214" height="17"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="bookmarkCollectionViewCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Whg-h7-328">
+                                <rect key="frame" x="0.0" y="137" width="414" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DHN-5m-JsU">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="allBookMarkCollectionViewCell" id="Gin-oE-7Su" customClass="allBookMarkCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5ui-Gh-pTr">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WVo-Ng-oe1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="WVo-Ng-oe1" secondAttribute="bottom" id="6Pc-Li-gG3"/>
+                                                <constraint firstItem="WVo-Ng-oe1" firstAttribute="top" secondItem="5ui-Gh-pTr" secondAttribute="top" id="FlC-8L-Yqt"/>
+                                                <constraint firstItem="WVo-Ng-oe1" firstAttribute="leading" secondItem="5ui-Gh-pTr" secondAttribute="leading" id="GhX-mo-Gxd"/>
+                                                <constraint firstAttribute="trailing" secondItem="WVo-Ng-oe1" secondAttribute="trailing" id="di6-16-ONN"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageViewCell" destination="WVo-Ng-oe1" id="JcO-fi-llb"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ySt-zp-M4o"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Whg-h7-328" firstAttribute="leading" secondItem="ySt-zp-M4o" secondAttribute="leading" id="HrP-Cc-8Ro"/>
+                            <constraint firstAttribute="bottom" secondItem="Whg-h7-328" secondAttribute="bottom" id="IHV-FA-T4e"/>
+                            <constraint firstItem="ySt-zp-M4o" firstAttribute="trailing" secondItem="Whg-h7-328" secondAttribute="trailing" id="P69-2i-w9a"/>
+                            <constraint firstItem="ySt-zp-M4o" firstAttribute="trailing" secondItem="Ssn-Ie-zFg" secondAttribute="trailing" constant="100" id="PBL-PA-fi5"/>
+                            <constraint firstItem="Ssn-Ie-zFg" firstAttribute="leading" secondItem="ySt-zp-M4o" secondAttribute="leading" constant="100" id="PZg-Ht-k6O"/>
+                            <constraint firstItem="Whg-h7-328" firstAttribute="top" secondItem="Ssn-Ie-zFg" secondAttribute="bottom" constant="60" id="Wbc-F0-FLK"/>
+                            <constraint firstItem="Ssn-Ie-zFg" firstAttribute="top" secondItem="P9T-9A-2fZ" secondAttribute="top" constant="60" id="XTs-9Y-RRv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hOB-N5-UyS">
+                        <barButtonItem key="leftBarButtonItem" image="folder" catalog="system" id="hNQ-Si-VM3">
+                            <color key="tintColor" red="0.90980392160000001" green="0.72156862749999995" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="folderBarButtonTapped:" destination="dtf-48-yOP" id="A6k-vU-PLc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="plus.square.on.square" catalog="system" id="0FL-BD-JQw">
+                            <color key="tintColor" red="0.90980392160000001" green="0.72156862749999995" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonTapped:" destination="dtf-48-yOP" id="xY6-g0-L45"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="allBookmarkCollectionView" destination="Whg-h7-328" id="6M5-Ae-JYK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="flm-hl-vH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-20.289855072463769" y="-830.35714285714278"/>
         </scene>
         <!--Folder View Controller-->
         <scene sceneID="kgF-Of-sTI">
@@ -436,8 +581,7 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24" weight="regular"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="bookmarkButtonTapped:" destination="ktc-cT-ltf" eventType="touchUpInside" id="Lbv-Jv-Ccq"/>
-                                                            <action selector="bookmarkButtonTapped:" destination="mlP-Ab-tUp" eventType="touchUpInside" id="QWG-Jp-eNd"/>
+                                                            <action selector="bookmarkButtonTapped:" destination="ktc-cT-ltf" eventType="touchUpInside" id="Zlq-8o-LMu"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -609,7 +753,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="1415"/>
                     <connections>
-                        <outlet property="bookmarButton" destination="0Q4-el-27c" id="6FB-7B-hp2"/>
+                        <outlet property="bookmarkButton" destination="0Q4-el-27c" id="x8Y-jp-vHX"/>
                         <outlet property="commentLabel" destination="Ti6-LW-owP" id="qYo-9F-lMj"/>
                         <outlet property="contentLabel" destination="Zur-WY-FeR" id="XoW-qL-0Cz"/>
                         <outlet property="dateLabel" destination="oOx-oI-YdW" id="zzs-X3-8Af"/>

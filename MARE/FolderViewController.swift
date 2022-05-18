@@ -109,9 +109,6 @@ extension FolderViewController: UITableViewDataSource {
     self.folderList.remove(at: indexPath.row)
     tableView.deleteRows(at: [indexPath], with: .automatic)
 
-//    if self.folderList.isEmpty {
-//      self.doneButtonTap()
-//    }
   }
 }
 

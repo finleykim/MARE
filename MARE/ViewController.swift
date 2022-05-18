@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var bookmarkCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var maincollectionViewCell : MainCollectionViewCell?
@@ -151,6 +152,8 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    @IBAction func seeAllBookmarkButtonTapped(_ sender: Any) {
+    }
 }
 
 

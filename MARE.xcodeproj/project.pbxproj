@@ -19,6 +19,7 @@
 		C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */; };
 		C543F7DF282CECB000BC36A4 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7DE282CECB000BC36A4 /* FolderViewController.swift */; };
 		C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7E0282CF26400BC36A4 /* Recipe.swift */; };
+		C5AE13662834C7A700F68B96 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AE13652834C7A700F68B96 /* BookmarkViewController.swift */; };
 		C5AEF649282FB93100BB1EC5 /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */; };
 		C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64A282FC77500BB1EC5 /* Folder.swift */; };
 		C5AEF64D282FCF3300BB1EC5 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */; };
@@ -39,6 +40,7 @@
 		C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		C543F7DE282CECB000BC36A4 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		C543F7E0282CF26400BC36A4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		C5AE13652834C7A700F68B96 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		C5AEF64A282FC77500BB1EC5 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				C543F7DE282CECB000BC36A4 /* FolderViewController.swift */,
 				C5AEF64C282FCF3300BB1EC5 /* FolderTableViewCell.swift */,
 				C5AEF648282FB93100BB1EC5 /* AddFolderViewController.swift */,
+				C5AE13652834C7A700F68B96 /* BookmarkViewController.swift */,
 				C50A9F74283337EC00DA476C /* Entity */,
 				C50A9F7528333B8400DA476C /* MainCollectionViewCell.swift */,
 				C50A9F7628333B8400DA476C /* MainCollectionViewCell.xib */,
@@ -178,6 +181,7 @@
 				C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */,
 				C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */,
 				C5AEF64B282FC77500BB1EC5 /* Folder.swift in Sources */,
+				C5AE13662834C7A700F68B96 /* BookmarkViewController.swift in Sources */,
 				C543F7CB282CB1ED00BC36A4 /* ViewController.swift in Sources */,
 				C543F7DF282CECB000BC36A4 /* FolderViewController.swift in Sources */,
 				C50A9F7728333B8400DA476C /* MainCollectionViewCell.swift in Sources */,
