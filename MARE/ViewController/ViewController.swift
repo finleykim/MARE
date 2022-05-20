@@ -213,11 +213,11 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView{
         case firstCollectionView:
-            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+            return CGSize(width: 100, height: 100)
         case secondCollectionView:
-            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+            return CGSize(width: (UIScreen.main.bounds.width / 2)-20, height: (UIScreen.main.bounds.width / 2)-20)
         default:
-            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+            return CGSize(width: 0, height: 0)
         }
     }
     
