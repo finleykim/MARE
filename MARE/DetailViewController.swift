@@ -5,14 +5,16 @@
 //  Created by Finley on 2022/05/12.
 //
 
-import Foundation
+
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController{
     
     var rightBarButtonItem = UINavigationItem()
     var recipe : Recipe?
     var indexPath: IndexPath?
+    let synthesizer = AVSpeechSynthesizer()
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -74,7 +76,11 @@ class DetailViewController: UIViewController{
     
     
     @IBAction func voiceButtonTapped(_ sender: Any) {
-        //Voice Support
+        guard let string = contentLabel.text else { return }
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        
+        synthesizer.speak(utterance)
     }
     
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {

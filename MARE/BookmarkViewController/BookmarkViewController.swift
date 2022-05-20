@@ -18,7 +18,7 @@ class BookmarkViewController: UIViewController{
         setupNotification()
         loadBookmarkList()
         setupCollectionView()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     

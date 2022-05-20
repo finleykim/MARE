@@ -24,10 +24,9 @@ class ViewController: UIViewController {
         loadRecipeList()
         setupCollectionView()
         notificationObserver()
-        
-        
-
     }
+    
+    
     private func setupCollectionView(){
         firstCollectionView.delegate = self
         firstCollectionView.dataSource = self
@@ -214,18 +213,6 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
         }
     }
 }
-
-
-
-
-
-
-
-    
-    
-
-        
-
 
 extension String{
     func toImage() -> UIImage?{

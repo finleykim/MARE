@@ -42,16 +42,16 @@ class WritingViewController: UIViewController{
     var editMode: EditMode = .new
     var selectImage: UIImage?
     var recipe: Recipe?
-    
-
-    
+    private var folderList = [Folder]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         setupEditMode()
         setupDataPicker()
+        setupPickerView()
         touchesBegan()
+        loadFolderList()
+        dismissPickerView()
+        setupFolderTextField()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -99,6 +99,17 @@ class WritingViewController: UIViewController{
         }
     }
     
+    
+    private func setupFolderTextField(){
+        if folderList.count == 0 {
+            self.folderTextField.placeholder = "생성된 폴더가 없어요"
+            self.folderTextField.isEnabled = false
+        } else{
+            self.folderTextField.placeholder = "폴더를 선택해주세요"
+            self.folderTextField.isEnabled = true
+        }
+    }
+    
     //EditMode
     private func setupEditMode(){
         switch editMode{
@@ -124,11 +135,7 @@ class WritingViewController: UIViewController{
     
     
     
-    private func setupPickerView(){
-        
-    
-        self.folderTextField.inputView = self.folderPicker
-    }
+
     
     private func setupDataPicker(){
         self.datePicker.datePickerMode = .date
@@ -144,8 +151,10 @@ class WritingViewController: UIViewController{
         formmator.locale = Locale(identifier: "ko_KR")
         self.dataDate = datePicker.date
         self.dateTextField.text = formmator.string(from: datePicker.date)
-        
     }
+    
+    
+    
     
 
     //dateFormatter
@@ -255,6 +264,73 @@ extension WritingViewController: UITextViewDelegate{
         textView.textColor = .label
         textView.font = .systemFont(ofSize: 17)
   }
+}
+
+//MARK: folder PickerView
+
+extension WritingViewController{
+
+    
+    private func loadFolderList(){
+        let userDefaults = UserDefaults.standard
+        guard let data = userDefaults.object(forKey: "folderList") as? [[String: Any]] else { return }
+        self.folderList = data.compactMap{
+            guard let uuidString = $0["uuidString"] as? String else { return nil }
+            guard let folderName = $0["folderName"] as? String else { return nil }
+            guard let date = $0["date"] as? Date else { return nil }
+            return Folder(uuidString: uuidString, folderName: folderName, date: date)
+        }
+        self.folderList = self.folderList.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+
+    }
+    
+    func setupPickerView(){
+        self.folderPicker.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 220)
+        self.folderPicker.dataSource = self
+        self.folderPicker.delegate = self
+        self.folderTextField.inputView = folderPicker
+    }
+    
+    func dismissPickerView() {
+            let toolBar = UIToolbar()
+            toolBar.sizeToFit()
+            let button = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(self.action))
+            toolBar.setItems([button], animated: true)
+            toolBar.isUserInteractionEnabled = true
+            folderTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func action() {
+        self.dismissPickerView()
+       }
+    
+    
+}
+
+extension WritingViewController: UIPickerViewDelegate,UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return folderList.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        
+        let folder = folderList[row]
+        return folder.folderName
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let folder = folderList[row]
+        self.folderTextField.text = folder.folderName
+    }
+    
+
 }
 
 

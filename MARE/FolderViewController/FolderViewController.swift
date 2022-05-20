@@ -30,6 +30,8 @@ class FolderViewController: UIViewController, UITableViewDelegate{
         setupTableView()
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("editRecipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newRecipe"), object: nil)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -40,8 +42,12 @@ class FolderViewController: UIViewController, UITableViewDelegate{
             $0.date.compare($1.date) == .orderedDescending
         })
         self.folderTableView.reloadData()
-        
     }
+    
+    
+    
+    
+    
     
     private func setup(){
         if folderList.count == 0{
