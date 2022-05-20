@@ -24,19 +24,22 @@ class ViewController: UIViewController {
         loadRecipeList()
         setupCollectionView()
         notificationObserver()
+        
+        
 
     }
     private func setupCollectionView(){
-                firstCollectionView.delegate = self
-                firstCollectionView.dataSource = self
-                let layout = UICollectionViewFlowLayout()
-                layout.scrollDirection = .horizontal
-                firstCollectionView.collectionViewLayout = layout
-                firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        firstCollectionView.delegate = self
+        firstCollectionView.dataSource = self
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        firstCollectionView.collectionViewLayout = layout
+        firstCollectionView.showsHorizontalScrollIndicator = false
+        firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
         
-                secondCollectionView.delegate = self
-                secondCollectionView.dataSource = self
-                secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        secondCollectionView.delegate = self
+        secondCollectionView.dataSource = self
+        secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
     }
   
     
@@ -44,7 +47,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(newRecipeNotification(_:)), name: NSNotification.Name("newRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editRecipeNotification(_:)), name: NSNotification.Name("editRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteRecipeNotification(_:)), name: NSNotification.Name("deleteRecipe"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("bookmarkRecipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("bookmark"), object: nil)
     }
     
     @objc func newRecipeNotification(_ notification: Notification){
@@ -154,7 +157,7 @@ class ViewController: UIViewController {
 
 
 
-extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource{
+extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case firstCollectionView:
@@ -197,18 +200,9 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDel
             
         default:
             return UICollectionViewCell()
-            
-
         }
-        
-        
-        
-        
-        
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView{
         case firstCollectionView:
@@ -219,12 +213,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDel
             return CGSize(width: 0, height: 0)
         }
     }
-    
-    
 }
-
-
-
 
 
 

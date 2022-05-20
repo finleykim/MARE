@@ -30,15 +30,16 @@ class DetailViewController: UIViewController{
         setUp()
         setupNavigationBar()
         NotificationCenter.default.addObserver(self, selector: #selector(bookmarkNotification(_:)), name: NSNotification.Name("bookMarkRecipe"), object: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     
     @objc func bookmarkNotification(_ notification: Notification){
-        guard let starDiary = notification.object as? [String: Any] else { return }
-        guard let bookmark = starDiary["bookmark"] as? Bool else { return }
-        guard let uuidString = starDiary["uuidString"] as? String else { return }
-        guard let data = self.recipe else { return }
-        if data.uuidString == uuidString {
+        guard let bookmarkRecipe = notification.object as? [String: Any] else { return }
+        guard let bookmark = bookmarkRecipe["bookmark"] as? Bool else { return }
+        guard let uuidString = bookmarkRecipe["uuidString"] as? String else { return }
+        guard let recipe = self.recipe else { return }
+        if recipe.uuidString == uuidString {
             self.recipe?.bookmark = bookmark
             self.setUp()
         }
@@ -57,7 +58,7 @@ class DetailViewController: UIViewController{
         self.commentLabel.text = recipe.comment
         self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
         self.bookmarkButton?.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        
     }
     
     private func dateToString(date: Date) -> String {

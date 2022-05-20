@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C5047D4128366C0300F20C6A /* FirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5047D4028366C0300F20C6A /* FirstCollectionViewCell.swift */; };
 		C5047D4328366C0C00F20C6A /* SecondCollectionviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5047D4228366C0C00F20C6A /* SecondCollectionviewCell.swift */; };
+		C5111F9D28377729005EB8EF /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5111F9C28377729005EB8EF /* BookmarkCell.swift */; };
 		C543F7C7282CB1ED00BC36A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7C6282CB1ED00BC36A4 /* AppDelegate.swift */; };
 		C543F7C9282CB1ED00BC36A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7C8282CB1ED00BC36A4 /* SceneDelegate.swift */; };
 		C543F7CB282CB1ED00BC36A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F7CA282CB1ED00BC36A4 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		C5047D4028366C0300F20C6A /* FirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5047D4228366C0C00F20C6A /* SecondCollectionviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCollectionviewCell.swift; sourceTree = "<group>"; };
+		C5111F9C28377729005EB8EF /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		C543F7C3282CB1ED00BC36A4 /* MARE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MARE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C543F7C6282CB1ED00BC36A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C543F7C8282CB1ED00BC36A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		C5111F9E28377744005EB8EF /* BookmarkViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5AE13652834C7A700F68B96 /* BookmarkViewController.swift */,
+				C5111F9C28377729005EB8EF /* BookmarkCell.swift */,
+			);
+			path = BookmarkViewController;
+			sourceTree = "<group>";
+		};
 		C543F7BA282CB1EC00BC36A4 = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +108,7 @@
 				C543F7DA282CEC3F00BC36A4 /* DetailViewController.swift */,
 				C543F7DC282CEC6600BC36A4 /* WritingViewController.swift */,
 				C5AE13732835288400F68B96 /* FolderViewController */,
-				C5AE13652834C7A700F68B96 /* BookmarkViewController.swift */,
+				C5111F9E28377744005EB8EF /* BookmarkViewController */,
 				C50A9F74283337EC00DA476C /* Entity */,
 			);
 			path = MARE;
@@ -201,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5AEF64D282FCF3300BB1EC5 /* FolderTableViewCell.swift in Sources */,
+				C5111F9D28377729005EB8EF /* BookmarkCell.swift in Sources */,
 				C543F7E1282CF26400BC36A4 /* Recipe.swift in Sources */,
 				C543F7DD282CEC6600BC36A4 /* WritingViewController.swift in Sources */,
 				C5047D4128366C0300F20C6A /* FirstCollectionViewCell.swift in Sources */,

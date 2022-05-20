@@ -11,6 +11,7 @@ import UIKit
 class FolderViewController: UIViewController, UITableViewDelegate{
     
 
+    @IBOutlet weak var addFolderStackView: UIStackView!
     @IBOutlet weak var folderTableView: UITableView!
     
     
@@ -23,10 +24,11 @@ class FolderViewController: UIViewController, UITableViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationBar()
         loadFolderList()
         setupTableView()
-        
+        setup()
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
     }
     
@@ -40,7 +42,15 @@ class FolderViewController: UIViewController, UITableViewDelegate{
         
     }
     
-    
+    private func setup(){
+        if folderList.count == 0{
+            self.addFolderStackView.alpha = 1
+            self.folderTableView.alpha = 0
+        } else {
+            self.addFolderStackView.alpha = 0
+            self.folderTableView.alpha = 1
+        }
+    }
     
     
     private func setupTableView(){
@@ -74,6 +84,16 @@ class FolderViewController: UIViewController, UITableViewDelegate{
         })
 
     }
+    
+
+    @IBAction func addfolderStackViewButtonTapped(_ sender: UIButton) {
+        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddFolderViewController") as? AddFolderViewController else { return }
+        
+  
+        viewController.modalTransitionStyle = .crossDissolve
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
 
 }
 

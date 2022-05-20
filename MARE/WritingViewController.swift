@@ -172,7 +172,7 @@ class WritingViewController: UIViewController{
     }
 
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
-
+        
     }
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
         present(imagePickerController, animated: true)
