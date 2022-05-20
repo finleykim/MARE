@@ -30,6 +30,7 @@ class FolderViewController: UIViewController, UITableViewDelegate{
         setupTableView()
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     @objc private func newFolder(_ notification: Notification){

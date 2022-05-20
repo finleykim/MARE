@@ -52,7 +52,7 @@ class WritingViewController: UIViewController{
         setupEditMode()
         setupDataPicker()
         touchesBegan()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
 

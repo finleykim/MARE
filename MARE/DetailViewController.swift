@@ -56,10 +56,12 @@ class DetailViewController: UIViewController{
         self.ingredientLabel.text = recipe.ingredient
         self.contentLabel.text = recipe.content
         self.commentLabel.text = recipe.comment
-        self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark") : UIImage(systemName: "bookmart.fill"), for: .normal)
+        self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         self.bookmarkButton?.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
         
     }
+    
+  
     
     private func dateToString(date: Date) -> String {
         let formetter = DateFormatter()
