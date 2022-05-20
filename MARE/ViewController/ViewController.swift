@@ -10,10 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     
-    @IBOutlet weak var bookmarkCollectionView: UICollectionView!
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    var maincollectionViewCell : MainCollectionViewCell?
+    @IBOutlet weak var firstCollectionView: UICollectionView!
+    @IBOutlet weak var secondCollectionView: UICollectionView!
     var recipeList = [Recipe](){
         didSet{
             self.saveRecipeList()
@@ -24,17 +22,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadRecipeList()
-        registerNib()
         setupCollectionView()
         notificationObserver()
 
     }
-
-    private func registerNib(){
-        let nibName = UINib(nibName: "MainCollectionViewCell", bundle: nil)
-        self.collectionView.register(nibName, forCellWithReuseIdentifier: "MainCollectionViewCell")
+    private func setupCollectionView(){
+        firstCollectionView.delegate = self
+        firstCollectionView.dataSource = self
+        firstCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+        
+        
+        secondCollectionView.delegate = self
+        secondCollectionView.dataSource = self
+        secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+ 
     }
-    
+  
     
     func notificationObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(newRecipeNotification(_:)), name: NSNotification.Name("newRecipe"), object: nil)
@@ -50,7 +55,8 @@ class ViewController: UIViewController {
             $0.date.compare($1.date) == .orderedDescending
         })
 
-        self.collectionView.reloadData()
+        self.firstCollectionView.reloadData()
+        self.secondCollectionView.reloadData()
     }
     
     @objc func editRecipeNotification(_ notification: Notification){
@@ -61,14 +67,16 @@ class ViewController: UIViewController {
         self.recipeList = self.recipeList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
-        self.collectionView.reloadData()
+        self.firstCollectionView.reloadData()
+        self.secondCollectionView.reloadData()
     }
     
     @objc func deleteRecipeNotification(_ notification: Notification){
         guard let uuidString = notification.object as? String else { return }
         guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
         self.recipeList.remove(at: index)
-        self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        self.firstCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        self.secondCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
     }
     
     @objc func starDiaryNotification(_ notification: Notification) {
@@ -123,21 +131,10 @@ class ViewController: UIViewController {
     }
     
     
-    private func setupCollectionView(){
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-    }
+ 
     
 
-    private func setupCellLabel(){
-        if maincollectionViewCell?.cellImageView.image == UIImage(named: "NilImage"){
-            maincollectionViewCell?.cellLabel.alpha = 1
-        }else {
-            maincollectionViewCell?.cellLabel.alpha = 0
-        }
-    }
-    
+ 
     
     
     @IBAction func folderBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -157,36 +154,90 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+
+extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.recipeList.count
+        switch collectionView{
+        case firstCollectionView:
+            return recipeList.count
+        case secondCollectionView:
+            return recipeList.count
+        default:
+            return 0
+        }
     }
     
-
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            let recipe = self.recipeList[indexPath.row]
+            viewController.recipe = recipe
+            viewController.indexPath = indexPath
+            
+    
+            navigationController?.pushViewController(viewController, animated: true)
+    
+        }
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
-        let recipe = self.recipeList[indexPath.row]
-        cell.cellImageView.image = recipe.mainImage.toImage()
-        cell.cellLabel.text = recipe.title
-        setupCellLabel()
-        
-        return cell
-    }
+        switch collectionView{
+        case firstCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstCell", for: indexPath) as? FirstCollectionViewCell else { return UICollectionViewCell() }
+            let recipe = self.recipeList[indexPath.row]
+            cell.imageView.image = recipe.mainImage.toImage()
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        let recipe = self.recipeList[indexPath.row]
-        viewController.recipe = recipe
-        viewController.indexPath = indexPath
+            return cell
+        case secondCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "secondCell", for: indexPath) as? SecondCollectionviewCell else { return UICollectionViewCell() }
+            let recipe = self.recipeList[indexPath.row]
+            cell.imageView.image = recipe.mainImage.toImage()
+
+
+            
+            return cell
+            
+        default:
+            return UICollectionViewCell()
+            
+
+        }
         
-        navigationController?.pushViewController(viewController, animated: true)
+        
+        
+        
         
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: (UIScreen.main.bounds.width / 2) - 20)
+        switch collectionView{
+        case firstCollectionView:
+            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+        case secondCollectionView:
+            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+        default:
+            return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 80)
+        }
     }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+        
+
 
 extension String{
     func toImage() -> UIImage?{
