@@ -27,17 +27,16 @@ class ViewController: UIViewController {
 
     }
     private func setupCollectionView(){
-        firstCollectionView.delegate = self
-        firstCollectionView.dataSource = self
-        firstCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+                firstCollectionView.delegate = self
+                firstCollectionView.dataSource = self
+                let layout = UICollectionViewFlowLayout()
+                layout.scrollDirection = .horizontal
+                firstCollectionView.collectionViewLayout = layout
+                firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
         
-        
-        
-        secondCollectionView.delegate = self
-        secondCollectionView.dataSource = self
-        secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        
- 
+                secondCollectionView.delegate = self
+                secondCollectionView.dataSource = self
+                secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
     }
   
     
