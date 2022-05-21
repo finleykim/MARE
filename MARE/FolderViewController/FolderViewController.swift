@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FolderViewController: UIViewController, UITableViewDelegate{
+class FolderViewController: UIViewController{
     
 
     @IBOutlet weak var addFolderStackView: UIStackView!
@@ -20,7 +20,7 @@ class FolderViewController: UIViewController, UITableViewDelegate{
             self.saveFolderList()
         }
     }
-    
+    var recipe : Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,8 @@ class FolderViewController: UIViewController, UITableViewDelegate{
         let userDefaults = UserDefaults.standard
         userDefaults.set(date, forKey: "folderList")
     }
+    
+
     
     private func loadFolderList(){
         let userDefaults = UserDefaults.standard
@@ -139,14 +141,18 @@ extension FolderViewController: UITableViewDataSource {
   }
 }
 
-//extension FolderViewController: UITableViewDelegate {
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    var folder = self.folderList[indexPath.row]
-//    folder.done = !folderList.done
-////    self.folderList[indexPath.row] = folderList
-////    self.tableView.reloadRows(at: [indexPath], with: .automatic)
-//  }
-//}
+extension FolderViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "FolderRecipeListViewController") as? FolderRecipeListViewController else { return }
+      let folder = self.folderList[indexPath.row]
+      viewController.folder = folder
+      viewController.indexPath = indexPath
+                
+      navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+    
+}
 
 
 extension FolderViewController{
@@ -170,3 +176,5 @@ extension FolderViewController{
         self.present(viewController, animated: true, completion: nil)
     }
 }
+
+
