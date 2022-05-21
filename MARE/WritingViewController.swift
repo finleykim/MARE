@@ -52,6 +52,7 @@ class WritingViewController: UIViewController{
         loadFolderList()
         dismissPickerView()
         setupFolderTextField()
+        setupTextField()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -65,6 +66,14 @@ class WritingViewController: UIViewController{
         singleTapGestureRecognizer.isEnabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
         self.secondView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    private func setupTextField(){
+        
+        titleTextField.delegate = self
+        cookingTimeTextField.delegate = self
+        ingredientTextField.delegate = self
+      
     }
     
     @objc private func keyboardIsHidden(sender: UITapGestureRecognizer){
@@ -264,6 +273,8 @@ extension WritingViewController: UITextViewDelegate{
         textView.textColor = .label
         textView.font = .systemFont(ofSize: 17)
   }
+    
+
 }
 
 //MARK: folder PickerView
@@ -333,6 +344,15 @@ extension WritingViewController: UIPickerViewDelegate,UIPickerViewDataSource{
 
 }
 
+
+extension WritingViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+
+}
 
 extension UIImage{
     func toString() -> String?{

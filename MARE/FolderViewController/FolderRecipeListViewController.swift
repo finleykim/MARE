@@ -72,14 +72,6 @@ class FolderRecipeListViewController: UIViewController{
     }
     
     
-//    @objc func folderSort(_ notification: Notification){
-//        guard let folderRecipe = notification.object as? [String: Any] else { return }
-//        guard let recipe = folderRecipe["recipe"] as? Recipe else { return }
-//        guard let uuidString = folderRecipe["uuidString"] as? String else { return }
-//        guard let folderName = folderRecipe["folderName"] as? String else { return }
-//        self.folderNameLabel.text = folderName
-//
-//    }
     
     
     

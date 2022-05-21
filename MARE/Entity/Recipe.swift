@@ -24,3 +24,13 @@ struct Recipe{
 //struct MainImage{
 //    var mainImage: [String: UIImage]
 //}
+
+
+struct RecipeSearch{
+    var recipes: [Recipe] { searchInfo.row }
+    private let searchInfo: SearchInfo
+    
+    struct SearchInfo{
+        var row: [Recipe] = []
+    }
+}

@@ -21,7 +21,8 @@ final class AddFolderViewController: UIViewController{
         super.viewDidLoad()
         setup()
         touchesBegan()
-
+        self.nameTextField.delegate = self
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,4 +62,11 @@ final class AddFolderViewController: UIViewController{
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension AddFolderViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

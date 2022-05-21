@@ -10,20 +10,64 @@ import UIKit
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var startPageView: UIView!
     @IBOutlet weak var firstCollectionView: UICollectionView!
     @IBOutlet weak var secondCollectionView: UICollectionView!
+    @IBOutlet weak var allRecipeView: UIView!
+    @IBOutlet weak var topLogo: UIImageView!
+    @IBOutlet weak var bookMarkLabelStack: UIStackView!
+    
+    
+    
     var recipeList = [Recipe](){
         didSet{
             self.saveRecipeList()
         }
     }
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadRecipeList()
         setupCollectionView()
         notificationObserver()
+        setupFirstPage()
+        setupBookmarkFirstPage()
+        //setupTopLogoConstraints()
+    }
+    
+    
+    private func setupFirstPage(){
+        if self.recipeList.count == 0{
+            startPageView.alpha = 1
+        } else{
+            startPageView.alpha = 0
+        }
+    }
+    
+    private func setupTopLogoConstraints(){
+//        topLogo.snp.makeConstraints{
+//            $0.top.equalToSuperview().inset(60)
+//            $0.bottom.equalTo(allRecipeView.snp.top).offset(20)
+//            $0.leading.equalToSuperview().inset(100)
+//            $0.trailing.equalToSuperview().inset(100)
+//        }
+    }
+    
+    
+    private func setupBookmarkFirstPage(){
+        if firstCollectionView == nil{
+            self.bookMarkLabelStack.alpha = 0
+            self.firstCollectionView.isHidden = true
+            allRecipeView.snp.makeConstraints{
+                $0.top.equalToSuperview().inset(200)
+                $0.bottom.equalToSuperview()
+                $0.leading.equalToSuperview().inset(10)
+                $0.trailing.equalToSuperview().inset(10)
+            }
+        }
+  
     }
     
     
@@ -150,7 +194,9 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @IBAction func seeAllBookmarkButtonTapped(_ sender: Any) {
+
+    @IBAction func seeallBookmarkButtonTapped(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 1
     }
 }
 
@@ -160,7 +206,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case firstCollectionView:
-            return recipeList.count
+            return self.recipeList.filter({ $0.bookmark == true }).count
         case secondCollectionView:
             return recipeList.count
         default:
@@ -184,7 +230,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
         switch collectionView{
         case firstCollectionView:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstCell", for: indexPath) as? FirstCollectionViewCell else { return UICollectionViewCell() }
-            let recipe = self.recipeList[indexPath.row]
+            let recipe = self.recipeList.filter({ $0.bookmark == true })[indexPath.row]
+            
             cell.imageView.image = recipe.mainImage.toImage()
 
             return cell
