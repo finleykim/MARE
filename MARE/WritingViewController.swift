@@ -27,6 +27,7 @@ class WritingViewController: UIViewController{
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var commentTextField: UITextView!
     @IBOutlet weak var folderTextField: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     private lazy var imagePickerController: UIImagePickerController = {
        let imagePickerController = UIImagePickerController()
@@ -52,14 +53,15 @@ class WritingViewController: UIViewController{
         loadFolderList()
         dismissPickerView()
         setupFolderTextField()
-        setupTextField()
+        saveButton.isEnabled = true
+        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         self.navigationItem.leftBarButtonItem = UIBarButtonItem()
     }
     
 
     
-    
+  
     
     private func touchesBegan(){
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardIsHidden(sender:)))
@@ -69,13 +71,9 @@ class WritingViewController: UIViewController{
         self.secondView.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
-    private func setupTextField(){
-        
-        titleTextField.delegate = self
-        cookingTimeTextField.delegate = self
-        ingredientTextField.delegate = self
-      
-    }
+
+    
+
     
     @objc private func keyboardIsHidden(sender: UITapGestureRecognizer){
         self.view.endEditing(true)
@@ -129,7 +127,7 @@ class WritingViewController: UIViewController{
         case let .edit(_, recipe):
             contentBasicSetup()
             self.mainImage.image = recipe.mainImage.toImage()
-            //self.dataDate = recipe.date
+            self.dataDate = recipe.date
             self.dateTextField.text = dateToString(date: recipe.date)
             self.cookingTimeTextField.text = recipe.cookingTime
             self.titleTextField.text = recipe.title
@@ -224,9 +222,7 @@ class WritingViewController: UIViewController{
                 object: recipe,
                 userInfo: nil
             )
-            
         case let .edit(_, recipe):
-
             let recipe = Recipe(
                 uuidString: recipe.uuidString,
                 title: title,
@@ -351,6 +347,8 @@ extension WritingViewController: UITextFieldDelegate{
         textField.resignFirstResponder()
         return true
     }
+    
+
     
 
 }

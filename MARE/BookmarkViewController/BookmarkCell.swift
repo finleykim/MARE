@@ -9,6 +9,7 @@ import UIKit
 
 class BookmarkCell: UICollectionViewCell{
     
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     required init?(coder: NSCoder) {

@@ -59,7 +59,7 @@ class DetailViewController: UIViewController{
         self.contentLabel.text = recipe.content
         self.commentLabel.text = recipe.comment
         self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
-        self.bookmarkButton?.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+       
         
     }
     
@@ -109,11 +109,11 @@ class DetailViewController: UIViewController{
 extension DetailViewController{
     func setupNavigationBar(){
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        rightBarButtonItem.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+       
        navigationItem.rightBarButtonItem = rightBarButtonItem
         
         let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        leftBarButtonItem.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+    
        navigationItem.leftBarButtonItem = leftBarButtonItem
 
     }
@@ -160,7 +160,7 @@ extension DetailViewController{
     @objc func editNotification(_ notification: Notification){
         guard let recipe = notification.object as? Recipe else { return }
         self.recipe = recipe
-        self.setUp()
+       // self.setUp()
     }
     
     func deleteButtonTapped(_ action: UIAlertAction){

@@ -22,6 +22,7 @@ class FolderViewController: UIViewController{
     }
     var recipe : Recipe?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +30,9 @@ class FolderViewController: UIViewController{
         loadFolderList()
         setupTableView()
         setup()
+        
+      
+        
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("editRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newRecipe"), object: nil)
@@ -63,6 +67,8 @@ class FolderViewController: UIViewController{
     private func setupTableView(){
         self.folderTableView.delegate = self
         self.folderTableView.dataSource = self
+        self.folderTableView.rowHeight = 80
+        
     }
     
     private func saveFolderList(){
@@ -95,6 +101,11 @@ class FolderViewController: UIViewController{
     }
     
 
+    
+
+    
+    
+
     @IBAction func addfolderStackViewButtonTapped(_ sender: UIButton) {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddFolderViewController") as? AddFolderViewController else { return }
         
@@ -119,6 +130,7 @@ extension FolderViewController: UITableViewDataSource {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "FolderTableViewCell", for: indexPath) as? FolderTableViewCell else { return UITableViewCell() }
     let folder = self.folderList[indexPath.row]
       cell.folderNameLabel.text = folder.folderName
+      
     return cell
   }
 
@@ -139,6 +151,10 @@ extension FolderViewController: UITableViewDataSource {
     tableView.deleteRows(at: [indexPath], with: .automatic)
 
   }
+    
+
+    
+    
 }
 
 extension FolderViewController: UITableViewDelegate {

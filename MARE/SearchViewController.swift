@@ -54,7 +54,7 @@ class SearchViewController: UIViewController{
     
     private func setNavigationItems(){
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "mare"
+        navigationItem.title = "Search"
         
         let searchController = UISearchController()
         searchController.searchBar.placeholder = "레시피명을 입력해주세요"

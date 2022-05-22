@@ -37,14 +37,16 @@ class ViewController: UIViewController {
         notificationObserver()
         setupFirstPage()
         setupBookmarkFirstPage()
-        //setupScrollLayout()
-        //setupTopLogoConstraints()
+
         
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        setupFirstPage()
+        setupBookmarkFirstPage()
+    }
     
-    private let scrollView = UIScrollView()
+
     
     private func setupFirstPage(){
         if self.recipeList.count == 0{
@@ -53,31 +55,9 @@ class ViewController: UIViewController {
             startPageView.alpha = 0
         }
     }
+
     
-    private func setupScrollLayout(){
-//        view.addSubview(scrollView)
-//        scrollView.snp.makeConstraints{
-//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            $0.bottom.equalToSuperview()
-//            $0.leading.equalToSuperview()
-//            $0.trailing.equalToSuperview()
-//        }
-//        scrollView.addSubview(contentView)
-//        contentView.snp.makeConstraints{
-//            $0.edges.equalToSuperview()
-//            $0.width.equalToSuperview()
-//
-//        }
-    }
     
-    private func setupTopLogoConstraints(){
-//        topLogo.snp.makeConstraints{
-//            $0.top.equalToSuperview().inset(60)
-//            $0.bottom.equalTo(allRecipeView.snp.top).offset(20)
-//            $0.leading.equalToSuperview().inset(100)
-//            $0.trailing.equalToSuperview().inset(100)
-//        }
-    }
     
     
     private func setupBookmarkFirstPage(){
@@ -89,6 +69,24 @@ class ViewController: UIViewController {
                 $0.bottom.equalToSuperview()
                 $0.leading.equalToSuperview().inset(10)
                 $0.trailing.equalToSuperview().inset(10)
+            }
+        } else if recipe.count > 0{
+            self.bookmarkView.isHidden = false
+            topLogo.snp.makeConstraints{
+                $0.top.equalToSuperview().inset(60)
+                $0.leading.equalToSuperview().inset(100)
+                $0.trailing.equalToSuperview().inset(100)
+            }
+            bookmarkView.snp.makeConstraints{
+                $0.top.equalTo(topLogo.snp.bottom).offset(20)
+                $0.leading.equalToSuperview()
+                $0.trailing.equalToSuperview()
+            }
+            allRecipeView.snp.makeConstraints{
+                $0.top.equalTo(bookmarkView.snp.bottom).offset(20)
+                $0.leading.equalToSuperview().inset(10)
+                $0.trailing.equalToSuperview().inset(10)
+                $0.bottom.equalToSuperview()
             }
         }
   
@@ -155,6 +153,7 @@ class ViewController: UIViewController {
       guard let uuidString = starDiary["uuidString"] as? String else { return }
       guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
       self.recipeList[index].bookmark = bookmark
+        self.firstCollectionView.reloadData()
         
     }
     
@@ -208,12 +207,10 @@ class ViewController: UIViewController {
  
     
     
-    @IBAction func folderBarButtonTapped(_ sender: UIBarButtonItem) {
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "FolderViewController") as? FolderViewController else { return }
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
+//    @IBAction func folderBarButtonTapped(_ sender: UIBarButtonItem) {
+//        self.tabBarController?.selectedIndex = 2
+//        
+//    }
     @IBAction func addButtonTapped(_ sender: Any) {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "WritingViewController") as? WritingViewController else { return }
         
@@ -236,18 +233,32 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
         case secondCollectionView:
             return recipeList.count
         default:
-            return 0
+            return 1
         }
     }
     
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-            let recipe = self.recipeList[indexPath.row]
-            viewController.recipe = recipe
-            viewController.indexPath = indexPath
-            
-    
+            switch collectionView{
+            case firstCollectionView:
+                let recipe = self.recipeList.filter({ $0.bookmark == true })[indexPath.row]
+                viewController.recipe = recipe
+                viewController.indexPath = indexPath
+               
+            case secondCollectionView:
+                    let recipe = self.recipeList[indexPath.row]
+                    viewController.recipe = recipe
+                    viewController.indexPath = indexPath
+                   
+                
+                
+                
+            default:
+                break
+            }
             navigationController?.pushViewController(viewController, animated: true)
+    
+            
     
         }
     
@@ -265,7 +276,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "secondCell", for: indexPath) as? SecondCollectionviewCell else { return UICollectionViewCell() }
             let recipe = self.recipeList[indexPath.row]
             cell.imageView.image = recipe.mainImage.toImage()
-
+                //cell.imageView.layer.cornerRadius = 50
+            cell.label.text = recipe.title
 
             
             return cell
@@ -280,11 +292,13 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
         case firstCollectionView:
             return CGSize(width: 80, height: 80)
         case secondCollectionView:
-            return CGSize(width: (UIScreen.main.bounds.width / 2)-20, height: (UIScreen.main.bounds.width / 2)-20)
+            return CGSize(width: (UIScreen.main.bounds.width / 2)-15, height: (UIScreen.main.bounds.width / 2)-15)
         default:
             return CGSize(width: 0, height: 0)
         }
     }
+    
+
 }
 
 extension String{
@@ -294,4 +308,9 @@ extension String{
         }
         return nil
     }
+}
+
+
+extension UIColor{
+    class var CustomColor: UIColor? { return UIColor(named: "CustomColor")}
 }

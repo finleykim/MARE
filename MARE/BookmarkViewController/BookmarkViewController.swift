@@ -71,8 +71,8 @@ class BookmarkViewController: UIViewController{
     @objc func addbookMark(_ notification: Notification){
         guard let bookmarkRecipe = notification.object as? [String: Any] else { return }
         guard let recipe = bookmarkRecipe["recipe"] as? Recipe else { return }
-        guard let uuidString = bookmarkRecipe["uuidString"] as? String else { return }
         guard let bookmark = bookmarkRecipe["bookmark"] as? Bool else { return }
+        guard let uuidString = bookmarkRecipe["uuidString"] as? String else { return }
 
         if bookmark{
             self.recipeList.append(recipe)
@@ -121,6 +121,7 @@ extension BookmarkViewController: UICollectionViewDelegateFlowLayout,UICollectio
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookmarkCell", for: indexPath) as? BookmarkCell else { return UICollectionViewCell() }
         let recipe = self.recipeList[indexPath.row]
         cell.imageView.image = recipe.mainImage.toImage()
+        cell.label.text = recipe.title
         
         return cell
     }
@@ -129,7 +130,7 @@ extension BookmarkViewController: UICollectionViewDelegateFlowLayout,UICollectio
         return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: (UIScreen.main.bounds.width / 2) - 20)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         let recipe = self.recipeList[indexPath.row]
         viewController.recipe = recipe

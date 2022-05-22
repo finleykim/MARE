@@ -9,6 +9,7 @@ import UIKit
 
 class FolderRecipeListViewCell: UICollectionViewCell{
     
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
 }

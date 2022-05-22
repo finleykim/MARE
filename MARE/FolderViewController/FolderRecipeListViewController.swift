@@ -23,7 +23,7 @@ class FolderRecipeListViewController: UIViewController{
         setupCollectionView()
         folderRecipeLoad()
         setup()
-        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -123,11 +123,8 @@ extension FolderRecipeListViewController:UICollectionViewDelegate,UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? FolderRecipeListViewCell else { return UICollectionViewCell() }
         let recipe = recipeList[indexPath.row]
-        
-            
-            
-            
         cell.imageView.image = recipe.mainImage.toImage()
+        cell.label.text = recipe.title
          return cell
     }
     
