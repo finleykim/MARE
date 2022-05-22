@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
@@ -17,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var topLogo: UIImageView!
     @IBOutlet weak var bookMarkLabelStack: UIStackView!
     
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var bookmarkView: UIView!
     
     
     var recipeList = [Recipe](){
@@ -34,9 +37,14 @@ class ViewController: UIViewController {
         notificationObserver()
         setupFirstPage()
         setupBookmarkFirstPage()
+        //setupScrollLayout()
         //setupTopLogoConstraints()
+        
     }
     
+
+    
+    private let scrollView = UIScrollView()
     
     private func setupFirstPage(){
         if self.recipeList.count == 0{
@@ -44,6 +52,22 @@ class ViewController: UIViewController {
         } else{
             startPageView.alpha = 0
         }
+    }
+    
+    private func setupScrollLayout(){
+//        view.addSubview(scrollView)
+//        scrollView.snp.makeConstraints{
+//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+//            $0.bottom.equalToSuperview()
+//            $0.leading.equalToSuperview()
+//            $0.trailing.equalToSuperview()
+//        }
+//        scrollView.addSubview(contentView)
+//        contentView.snp.makeConstraints{
+//            $0.edges.equalToSuperview()
+//            $0.width.equalToSuperview()
+//
+//        }
     }
     
     private func setupTopLogoConstraints(){
@@ -57,11 +81,11 @@ class ViewController: UIViewController {
     
     
     private func setupBookmarkFirstPage(){
-        if firstCollectionView == nil{
-            self.bookMarkLabelStack.alpha = 0
-            self.firstCollectionView.isHidden = true
+        let recipe = self.recipeList.filter({ $0.bookmark == true })
+        if recipe.count == 0{
+            self.bookmarkView.isHidden = true
             allRecipeView.snp.makeConstraints{
-                $0.top.equalToSuperview().inset(200)
+                $0.top.equalToSuperview()
                 $0.bottom.equalToSuperview()
                 $0.leading.equalToSuperview().inset(10)
                 $0.trailing.equalToSuperview().inset(10)
@@ -78,11 +102,12 @@ class ViewController: UIViewController {
         layout.scrollDirection = .horizontal
         firstCollectionView.collectionViewLayout = layout
         firstCollectionView.showsHorizontalScrollIndicator = false
-        firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        //firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
         
         secondCollectionView.delegate = self
         secondCollectionView.dataSource = self
         secondCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+ 
     }
   
     
@@ -90,7 +115,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(newRecipeNotification(_:)), name: NSNotification.Name("newRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editRecipeNotification(_:)), name: NSNotification.Name("editRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteRecipeNotification(_:)), name: NSNotification.Name("deleteRecipe"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("bookmark"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bookmarkNotification(_:)), name: NSNotification.Name("bookmark"), object: nil)
     }
     
     @objc func newRecipeNotification(_ notification: Notification){
@@ -124,12 +149,13 @@ class ViewController: UIViewController {
         self.secondCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
     }
     
-    @objc func starDiaryNotification(_ notification: Notification) {
+    @objc func bookmarkNotification(_ notification: Notification) {
       guard let starDiary = notification.object as? [String: Any] else { return }
       guard let bookmark = starDiary["bookmark"] as? Bool else { return }
       guard let uuidString = starDiary["uuidString"] as? String else { return }
       guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
       self.recipeList[index].bookmark = bookmark
+        
     }
     
     
@@ -252,7 +278,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView{
         case firstCollectionView:
-            return CGSize(width: 100, height: 100)
+            return CGSize(width: 80, height: 80)
         case secondCollectionView:
             return CGSize(width: (UIScreen.main.bounds.width / 2)-20, height: (UIScreen.main.bounds.width / 2)-20)
         default:

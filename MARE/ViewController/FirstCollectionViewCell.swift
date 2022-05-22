@@ -16,7 +16,7 @@ class FirstCollectionViewCell : UICollectionViewCell{
     
     required init?(coder: NSCoder) {
       super.init(coder: coder)
-      self.contentView.layer.cornerRadius = 30
+      self.contentView.layer.cornerRadius = 40
 
     }
 }

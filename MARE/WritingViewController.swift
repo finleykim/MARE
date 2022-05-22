@@ -54,6 +54,7 @@ class WritingViewController: UIViewController{
         setupFolderTextField()
         setupTextField()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem()
     }
     
 
