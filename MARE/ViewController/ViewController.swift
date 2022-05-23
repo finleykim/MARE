@@ -44,6 +44,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupFirstPage()
         setupBookmarkFirstPage()
+        loadRecipeList()
     }
     
 

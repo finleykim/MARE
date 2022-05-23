@@ -40,6 +40,7 @@ class FolderViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         loadFolderList()
+        setup()
     }
     @objc private func newFolder(_ notification: Notification){
         guard let folder = notification.object as? Folder else { return }
@@ -177,8 +178,6 @@ extension FolderViewController: UITableViewDelegate {
 
 extension FolderViewController{
     private func setupNavigationBar(){
-        let leftBarButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
-        navigationItem.leftBarButtonItem = leftBarButton
         
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBUttonTapped))
         navigationItem.rightBarButtonItem = rightBarButton
