@@ -30,15 +30,17 @@ class FolderViewController: UIViewController{
         loadFolderList()
         setupTableView()
         setup()
-        
-      
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newFolder"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("editRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(newFolder(_:)), name: NSNotification.Name("newRecipe"), object: nil)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadFolderList()
+    }
     @objc private func newFolder(_ notification: Notification){
         guard let folder = notification.object as? Folder else { return }
         self.folderList.append(folder)
@@ -114,7 +116,9 @@ class FolderViewController: UIViewController{
         self.present(viewController, animated: true, completion: nil)
     }
     
-
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 

@@ -143,7 +143,7 @@ class ViewController: UIViewController {
         guard let uuidString = notification.object as? String else { return }
         guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
         self.recipeList.remove(at: index)
-        self.firstCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        
         self.secondCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
     }
     

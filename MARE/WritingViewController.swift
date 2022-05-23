@@ -80,7 +80,7 @@ class WritingViewController: UIViewController{
     }
     
     private func contentBasicSetup(){
-        self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        
             [ingredientTextField,contentTextField,commentTextField].forEach{
                 $0?.layer.borderColor = UIColor.systemGray4.cgColor
                 $0?.textColor = .black
@@ -92,7 +92,7 @@ class WritingViewController: UIViewController{
     }
     
     private func newContentTextViewSetup(){
-        self.bookmarkButton.tintColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        
             [ingredientTextField,contentTextField,commentTextField].forEach{
                 $0?.layer.borderColor = UIColor.systemGray4.cgColor
                 $0?.textColor = .systemGray4
