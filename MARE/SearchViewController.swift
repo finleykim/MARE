@@ -12,13 +12,14 @@ class SearchViewController: UIViewController{
     
 
     var recipeList = [Recipe]()
-    var recipe : Recipe?
-    var searchText: String?
+    var filteredRecipeList = [Recipe]()
+    
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isHidden = true
+       
        return tableView
     }()
     
@@ -26,16 +27,36 @@ class SearchViewController: UIViewController{
         super.viewDidLoad()
         setNavigationItems()
         setTableViewLayout()
-        searchRecipeLoad()
-        setTableViewLayout()
+
+        loadRecipeList()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Candies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        
     }
     
 
-    private func searchRecipeLoad(){
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    func searchBarIsEmpty() -> Bool {
+      // Returns true if the text is empty or nil
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+      
+   
+    
+    func isFiltering() -> Bool {
+      return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    private func loadRecipeList(){
         let userDefaults = UserDefaults.standard
         guard let data = userDefaults.object(forKey: "recipeList") as? [[String : Any]] else { return }
         self.recipeList = data.compactMap{
-            
             guard let uuidString = $0["uuidString"] as? String else { return nil }
             guard let title = $0["title"] as? String else { return nil }
             guard let date = $0["date"] as? Date else { return nil }
@@ -46,11 +67,22 @@ class SearchViewController: UIViewController{
             guard let folder = $0["folder"] as? String else { return nil }
             guard let bookmark = $0["bookmark"] as? Bool else { return nil }
             guard let mainImage = $0["mainImage"] as? String else { return nil }
+            
             return Recipe(uuidString: uuidString, title: title, date: date, cookingTime: cookingTime, ingredient: ingredient, content: content, comment: comment, folder: folder, bookmark: bookmark, mainImage: mainImage)
-        }.sorted(by: {
+        }
+        self.recipeList = self.recipeList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
     }
+
+    private func filterContentForSearchText(_ searchText: String){
+       
+        filteredRecipeList = recipeList.filter({( candy: Recipe ) -> Bool in
+            return candy.title.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+    
     
     private func setNavigationItems(){
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -59,7 +91,7 @@ class SearchViewController: UIViewController{
         let searchController = UISearchController()
         searchController.searchBar.placeholder = "레시피명을 입력해주세요"
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
+        //searchController.searchBar.delegate = self
         
         navigationItem.searchController = searchController
     }
@@ -70,37 +102,35 @@ class SearchViewController: UIViewController{
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
- 
+    
+
     
 }
 
 
-extension SearchViewController: UISearchBarDelegate{
 
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        tableView.reloadData()
-        tableView.isHidden = false
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        tableView.isHidden = true
-        self.recipeList = []
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText
+
+extension SearchViewController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeList.count
+       
+            return filteredRecipeList.count
+        
+      
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        let recipe = recipeList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let recipe : Recipe
+     
+            recipe = filteredRecipeList[indexPath.row]
+       
+        
         cell.textLabel?.text = recipe.title
         
         return cell
