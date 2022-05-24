@@ -29,11 +29,7 @@ class SearchViewController: UIViewController{
         setTableViewLayout()
 
         loadRecipeList()
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+
         
         
     }
@@ -89,9 +85,12 @@ class SearchViewController: UIViewController{
         navigationItem.title = "Search"
         
         let searchController = UISearchController()
-        searchController.searchBar.placeholder = "레시피명을 입력해주세요"
         searchController.obscuresBackgroundDuringPresentation = false
-        //searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "레시피명을 입력해주세요"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         navigationItem.searchController = searchController
     }
@@ -138,7 +137,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        let recipe = self.recipeList[indexPath.row]
+        let recipe = filteredRecipeList[indexPath.row]
         viewController.recipe = recipe
         viewController.indexPath = indexPath
         self.navigationController?.pushViewController(viewController, animated: true)
