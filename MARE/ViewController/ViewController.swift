@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         setupFirstPage()
         setupBookmarkFirstPage()
 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +100,7 @@ class ViewController: UIViewController {
         layout.scrollDirection = .horizontal
         firstCollectionView.collectionViewLayout = layout
         firstCollectionView.showsHorizontalScrollIndicator = false
-        //firstCollectionView.backgroundColor = UIColor(red: 232, green: 184, blue: 40, alpha: 1)
+        
         
         secondCollectionView.delegate = self
         secondCollectionView.dataSource = self
@@ -154,6 +153,7 @@ class ViewController: UIViewController {
       guard let uuidString = starDiary["uuidString"] as? String else { return }
       guard let index = self.recipeList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
       self.recipeList[index].bookmark = bookmark
+        setupBookmarkFirstPage()
         self.firstCollectionView.reloadData()
         
     }

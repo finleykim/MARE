@@ -42,6 +42,7 @@ class FolderViewController: UIViewController{
         loadFolderList()
         setup()
     }
+    
     @objc private func newFolder(_ notification: Notification){
         guard let folder = notification.object as? Folder else { return }
         self.folderList.append(folder)

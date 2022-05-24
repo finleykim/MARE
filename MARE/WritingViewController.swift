@@ -311,7 +311,7 @@ extension WritingViewController{
     }
     
     @objc func action() {
-        self.dismissPickerView()
+        self.view.endEditing(true)
        }
     
     

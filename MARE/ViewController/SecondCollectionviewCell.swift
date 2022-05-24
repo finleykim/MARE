@@ -20,9 +20,6 @@ class SecondCollectionviewCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
       super.init(coder: coder)
         self.contentView.layer.cornerRadius = 25
-
-        
-
     }
     
 

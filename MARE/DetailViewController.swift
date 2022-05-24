@@ -35,6 +35,10 @@ class DetailViewController: UIViewController{
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setUp()
+    }
     
     @objc func bookmarkNotification(_ notification: Notification){
         guard let bookmarkRecipe = notification.object as? [String: Any] else { return }
@@ -109,10 +113,12 @@ class DetailViewController: UIViewController{
 extension DetailViewController{
     func setupNavigationBar(){
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        rightBarButtonItem.tintColor = .CustomColor
        
        navigationItem.rightBarButtonItem = rightBarButtonItem
         
         let leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(leftBarButtonTapped))
+        leftBarButtonItem.tintColor = .CustomColor
     
        navigationItem.leftBarButtonItem = leftBarButtonItem
 

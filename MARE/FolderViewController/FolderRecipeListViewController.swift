@@ -137,7 +137,7 @@ extension FolderRecipeListViewController:UICollectionViewDelegate,UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: (UIScreen.main.bounds.width / 2) - 20)
+        return CGSize(width: (UIScreen.main.bounds.width / 2) - 15, height: (UIScreen.main.bounds.width / 2) - 15)
     }
     
     
