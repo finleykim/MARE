@@ -166,8 +166,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="Ntb-SH-JS9"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -464,22 +463,20 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6ho-tA-hjX">
-                                <rect key="frame" x="108.5" y="339.5" width="197.5" height="217"/>
+                                <rect key="frame" x="108" y="339.5" width="198.5" height="217"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="1Oa-hJ-W4V">
-                                        <rect key="frame" x="35" y="0.0" width="127.5" height="142"/>
+                                        <rect key="frame" x="35.5" y="0.0" width="127.5" height="142"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="addFolder" cornerStyle="fixed">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="1"/>
-                                        </buttonConfiguration>
+                                        <buttonConfiguration key="configuration" style="plain" image="addFolder" cornerStyle="fixed"/>
                                         <connections>
                                             <action selector="addfolderStackViewButtonTapped:" destination="Ep1-Xl-hD8" eventType="touchUpInside" id="bIP-QJ-JZi"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8La-gE-JZZ">
-                                        <rect key="frame" x="0.0" y="142" width="197" height="75"/>
+                                        <rect key="frame" x="0.5" y="142" width="197" height="75"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 폴더가 없습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJC-DI-maG">
                                                 <rect key="frame" x="0.0" y="0.0" width="197" height="29"/>

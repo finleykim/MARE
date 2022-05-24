@@ -48,6 +48,7 @@ class FolderViewController: UIViewController{
         self.folderList = self.folderList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
+        setup()
         self.folderTableView.reloadData()
     }
     

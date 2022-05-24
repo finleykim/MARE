@@ -201,6 +201,13 @@ class ViewController: UIViewController {
         })
     }
     
+    private func dateToString(date: Date) -> String {
+        let formetter = DateFormatter()
+        formetter.dateFormat = "yyyy-MM-dd(EEEE)"
+        formetter.locale = Locale(identifier: "ko_KR")
+        
+        return formetter.string(from: date)
+    }
     
  
     
@@ -279,6 +286,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDat
             cell.imageView.image = recipe.mainImage.toImage()
                 //cell.imageView.layer.cornerRadius = 50
             cell.label.text = recipe.title
+            
 
             
             return cell
