@@ -832,6 +832,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="lg4-si-JU9" secondAttribute="trailing" id="CgG-Kf-1Nm"/>
+                                                            <constraint firstItem="lg4-si-JU9" firstAttribute="leading" secondItem="FhH-Re-3Zz" secondAttribute="leading" id="w5j-H9-BZG"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mlu-dc-zdd">
                                                         <rect key="frame" x="0.0" y="522" width="374" height="59"/>
@@ -888,7 +892,9 @@
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="FhH-Re-3Zz" secondAttribute="trailing" id="DAG-XK-ZRK"/>
                                                     <constraint firstAttribute="trailing" secondItem="mlu-dc-zdd" secondAttribute="trailing" id="LKx-xP-YFb"/>
+                                                    <constraint firstItem="FhH-Re-3Zz" firstAttribute="leading" secondItem="Uzl-Zw-zRa" secondAttribute="leading" id="LRo-h8-J7D"/>
                                                     <constraint firstItem="mlu-dc-zdd" firstAttribute="leading" secondItem="Uzl-Zw-zRa" secondAttribute="leading" id="lvx-ow-SPs"/>
                                                 </constraints>
                                             </stackView>
@@ -941,7 +947,9 @@
                         <outlet property="contentLabel" destination="Zur-WY-FeR" id="XoW-qL-0Cz"/>
                         <outlet property="dateLabel" destination="oOx-oI-YdW" id="zzs-X3-8Af"/>
                         <outlet property="ingredientLabel" destination="Ln3-om-kbR" id="nlv-mK-O0K"/>
+                        <outlet property="ingredientTTSButton" destination="1Ih-1l-79Q" id="zEz-HS-n2d"/>
                         <outlet property="mainImage" destination="COK-S0-3Gk" id="zfQ-Oo-bv9"/>
+                        <outlet property="recipeTTSButton" destination="r6u-KJ-BdF" id="4XH-NL-d2M"/>
                         <outlet property="temperatureLabel" destination="gLn-Qh-NZc" id="Z8b-ch-w9x"/>
                         <outlet property="titleLabel" destination="hcu-3Y-QPH" id="cuR-dD-ICl"/>
                     </connections>

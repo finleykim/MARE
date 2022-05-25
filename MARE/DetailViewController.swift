@@ -25,6 +25,8 @@ class DetailViewController: UIViewController{
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var bookmarkButton: UIButton!
+    @IBOutlet weak var ingredientTTSButton: UIButton!
+    @IBOutlet weak var recipeTTSButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -63,7 +65,16 @@ class DetailViewController: UIViewController{
         self.contentLabel.text = recipe.content
         self.commentLabel.text = recipe.comment
         self.bookmarkButton.setImage(recipe.bookmark ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
-       
+        self.ingredientTTSButton.layer.cornerRadius = 10
+        self.ingredientTTSButton.layer.shadowColor = UIColor.black.cgColor
+        self.ingredientTTSButton.layer.shadowOpacity = 0.1
+        self.ingredientTTSButton.layer.cornerRadius = 10
+        self.ingredientTTSButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        self.recipeTTSButton.layer.cornerRadius = 10
+        self.recipeTTSButton.layer.shadowColor = UIColor.black.cgColor
+        self.recipeTTSButton.layer.shadowOpacity = 0.1
+        self.recipeTTSButton.layer.cornerRadius = 10
+        self.recipeTTSButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         
     }
     
