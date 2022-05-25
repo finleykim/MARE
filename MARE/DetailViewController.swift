@@ -79,7 +79,15 @@ class DetailViewController: UIViewController{
     
     
     
-    @IBAction func voiceButtonTapped(_ sender: Any) {
+    @IBAction func ingredientTTSButtonTapped(_ sender: UIButton) {
+        guard let string = ingredientLabel.text else { return }
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        
+        synthesizer.speak(utterance)
+    }
+    
+    @IBAction func recipeTTSButtonTapped(_ sender: UIButton) {
         guard let string = contentLabel.text else { return }
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
