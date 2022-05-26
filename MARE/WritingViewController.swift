@@ -44,6 +44,7 @@ class WritingViewController: UIViewController{
     var selectImage: UIImage?
     var recipe: Recipe?
     private var folderList = [Folder]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupEditMode()
@@ -53,7 +54,7 @@ class WritingViewController: UIViewController{
         loadFolderList()
         dismissPickerView()
         setupFolderTextField()
-        saveButton.isEnabled = true
+
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         self.navigationItem.leftBarButtonItem = UIBarButtonItem()
@@ -188,6 +189,12 @@ class WritingViewController: UIViewController{
         }
     }
 
+    
+
+
+    
+
+    
     @IBAction func bookmarkButtonTapped(_ sender: UIButton) {
         
     }

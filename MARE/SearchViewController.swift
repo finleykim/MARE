@@ -27,11 +27,8 @@ class SearchViewController: UIViewController{
         super.viewDidLoad()
         setNavigationItems()
         setTableViewLayout()
-
         loadRecipeList()
 
-        
-        
     }
     
 

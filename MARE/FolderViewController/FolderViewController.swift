@@ -183,6 +183,7 @@ extension FolderViewController{
         
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBUttonTapped))
         navigationItem.rightBarButtonItem = rightBarButton
+        rightBarButton.tintColor = .CustomColor
     }
     
     @objc private func editButtonTapped(){

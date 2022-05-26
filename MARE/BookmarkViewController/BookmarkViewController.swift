@@ -9,6 +9,7 @@ import UIKit
 
 class BookmarkViewController: UIViewController{
     
+    @IBOutlet weak var startPageView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     var recipeList = [Recipe]()
     
@@ -18,9 +19,23 @@ class BookmarkViewController: UIViewController{
         setupNotification()
         loadBookmarkList()
         setupCollectionView()
+        setup()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setup()
+    }
+    private func setup(){
+        if recipeList.count == 0{
+            self.startPageView.alpha = 1
+            self.collectionView.alpha = 0
+        } else {
+            self.startPageView.alpha = 0
+            self.collectionView.alpha = 1
+        }
+    }
     
     private func setupCollectionView(){
         collectionView.delegate = self

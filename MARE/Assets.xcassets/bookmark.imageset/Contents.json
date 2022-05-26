@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "labelBack(white).png",
+      "filename" : "bookmark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "labelBack(white)@2x.png",
+      "filename" : "bookmark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "labelBack(white)@3x.png",
+      "filename" : "bookmark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

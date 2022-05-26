@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "labelBack(black).png",
+      "filename" : "saveButton(gray).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "labelBack(black)@2x.png",
+      "filename" : "saveButton(gray)@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "labelBack(black)@3x.png",
+      "filename" : "saveButton(gray)@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
