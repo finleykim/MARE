@@ -6,7 +6,7 @@
    
 개발기간 : 2022/5/12 ~ 2022/5/26   
 [개발일지 링크](https://www.notion.so/d88d8f133854451da797b6e580ca4075?v=67e8024370ef4dfbbf551ef1feb37dae) 
-![01](http://finley.dothome.co.kr/git/01.png){: width= 30%}
+![01](http://finley.dothome.co.kr/git/01.png)
 * 레시피를 모아볼 수 있는 홈   
    * 최근 작성한 레시피와 북마크한 레시피를 모아서 표시합니다   
    
