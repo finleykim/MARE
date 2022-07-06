@@ -1,4 +1,4 @@
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ffinleykim%2FMARE.git&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)   
+
 
 
 ![mockup(1000)](http://finley.dothome.co.kr/git/mareHeader.png)   
@@ -10,7 +10,7 @@
    
    
    
-MARE 기능설명
+✔️MARE 기능설명
 ------------
 * 레시피를 모아볼 수 있는 홈   
    * 최근 작성한 레시피와 북마크한 레시피를 모아서 표시합니다   
@@ -34,7 +34,7 @@ MARE 기능설명
    
    
    
-프로젝트후기
+✔️프로젝트후기
 ------------
 2주 동안 진행한 두 번째 개인 프로젝트
 레시피 관리 앱 ‘mare'가 완성되었습니다.
