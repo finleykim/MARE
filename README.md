@@ -25,5 +25,5 @@
    
 * 검색기능   
    * 자동완성되는 검색기능으로 오래 전 기록한 레시피도 쉽게 찾아볼 수 있습니다.   
-
-![App Store](https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white)(https://apps.apple.com/kr/app/mare/id1626776730)
+   
+[![App Store](https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white)](https://apps.apple.com/kr/app/mare/id1626776730)
