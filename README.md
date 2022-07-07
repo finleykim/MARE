@@ -1,11 +1,10 @@
 
 
 
-![mockup(1000)](http://finley.dothome.co.kr/git/mareHeader.png)   
 ![MareScreenShot](http://finley.dothome.co.kr/git/nareScreenShot.png)   
    
 [![App Store](https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white)](https://apps.apple.com/kr/app/mare/id1626776730)   
-개발기간 : 2022/5/12 ~ 2022/5/26   
+개발기간 : 2022/05/12 ~ 2022/05/26   
 [개발일지 바로가기](https://www.notion.so/d88d8f133854451da797b6e580ca4075?v=67e8024370ef4dfbbf551ef1feb37dae)   
    
    
@@ -35,7 +34,10 @@
    
    
 ✔️프로젝트후기
-------------
+------------   
+   
+![mockup(1000)](http://finley.dothome.co.kr/git/mareHeader.png)   
+   
 2주 동안 진행한 두 번째 개인 프로젝트
 레시피 관리 앱 ‘mare'가 완성되었습니다.
 짧지 않은 시간동안 여러 레시피를 다루었던 제 경험에 큰 도움을 받았기에 더욱 뿌듯한 프로젝트였습니다.
