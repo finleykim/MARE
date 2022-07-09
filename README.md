@@ -33,7 +33,7 @@
    
    
    
-✔️프로젝트후기
+✔️프로젝트 후기
 ------------   
    
 ![mockup(1000)](http://finley.dothome.co.kr/git/mareHeader.png)   
